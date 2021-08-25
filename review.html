@@ -27,6 +27,7 @@
         })(document);
 
     </script>
+    
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Main CSS File -->
@@ -37,6 +38,24 @@
             display: block !important;
             max-width: 100% !important;
             height: auto !important;
+        }
+
+        .inline-list li {
+            display: inline;
+            padding: 0px 5px;
+        }
+        .cart-btn:after {
+            content: "\e81c";
+            border: 0;
+            margin: -5px 2px 0 11px;
+            font-size: 15px;
+            font-family: porto;
+            width: auto;
+            height: auto;
+        }
+
+        .hide {
+            display: none;
         }
 
         .dropdown-arrow:after {
@@ -108,13 +127,12 @@
                         <img alt="phone" src="assets/images/phone.png" width="30" height="30" class="pb-1">
                         <h6>Call us now<a href="tel:#" class="font1">+91 97 690 06 388</a></h6>
                     </div>
-                    <div class="dropdown cart-dropdown">
+					 <div class="dropdown cart-dropdown">
                         <a href="review.html" class="dropdown-toggle dropdown-arrow">
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count badge-circle" id="cartItemCount">0</span>
                         </a>
                     </div>
-
                 </div><!-- End .header-right -->
             </div><!-- End .container -->
         </div><!-- End .header-middle -->
@@ -151,186 +169,64 @@
     </header><!-- End .header -->
 
     <main class="main">
-        <div class="container mt-2">
+
+        <div class="container" style="min-height:510px;">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Review</li>
+                </ol>
+            </nav>
+
             <div class="row">
-                <div class="col-lg-3 mb-2">
-                    <div class="side-menu-wrapper">
-                        <h2 class="side-menu-title">Our Kahani</h2>
+                <div class="col-lg-8 main-content">
+                    <table class="table table-mini-cart">
+                        <tbody id="reviewCart">
+                            <!--<tr>
+                                <td class="product-col">
+                                    <figure class="product-image-container">
+                                        <a href="javascript:" class="product-image">
+                                            <img id="reviewProductImage" src="assets/images/products/product-1.jpg" alt="product">
+                                            <input type="hidden" id="reviewProductID" />
+                                        </a>
+                                    </figure>
+                                    <div class="widget widget-categories">
+                                        <h4 class="widget-title">Blog Categories</h4>
+                                        <ul class="list">
+                                            <li><a href="javascript;">Color: <div style="background-color: red; height: 20px; width: 20px; display: inline-block; margin-bottom: -5px;"></div></a> </li>
+                                            <li><a href="#">RAM: <span class="">128 GB</span></a></li>
+                                            <li><a href="#">Thickness: <span class="">XL</span></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="price-col">Quanitity: <span class="">128</span></td>
+                            </tr>-->
 
-                        <div class="side-menu-body pt-2 px-3 mx-3 about-section">
-                            <p class="text-justify">Abra ka dabra is simply dummy text of the printing and typesetting industry.</p><p class="text-justify"> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived <a href="#">...Read More</a> </p>
-                        </div><!-- End .side-menu-body -->
-                    </div><!-- End .side-custom-menu -->
-                </div><!-- End .col-lg-3 -->
-
-                <div class="col-lg-9 mb-2">
-                    <div class="home-slider owl-carousel owl-theme owl-carousel-lazy" data-owl-options="{
-							'dots': true,
-							'nav': false,
-                            'autoplay':true,
-                            'autoplayTimeout':3000
-						}">
-                        <div class="home-slide home-slide1 banner banner-md-vw banner-sm-vw">
-                            <img class="owl-lazy slide-bg img-responsive" src="assets/images/lazy.png" data-src="assets/images/slider/slide-1.jpg" alt="slider image">
-                            <div class="banner-layer banner-layer-middle">
-                                <h4 class="text-white m-b-3">Find the Boundaries. Push Through!</h4>
-                                <h2 class="text-white mb-0">Summer Sale</h2>
-
-                            </div><!-- End .banner-layer -->
-                        </div><!-- End .home-slide -->
-
-                        <div class="home-slide home-slide2 banner banner-md-vw banner-sm-vw">
-                            <img class="owl-lazy slide-bg img-responsive" src="assets/images/lazy.png" data-src="assets/images/slider/slide-2.jpg" alt="slider image">
-                            <div class="banner-layer banner-layer-middle text-uppercase">
-                                <h2 class="m-b-3">Great Deals</h2>
-                            </div><!-- End .banner-layer -->
-                        </div><!-- End .home-slide -->
-
-                        <div class="home-slide home-slide3 banner banner-md-vw banner-sm-vw">
-                            <img class="owl-lazy slide-bg img-responsive" data-src="assets/images/slider/slide-3.jpg" />
-                            <div class="banner-layer banner-layer-middle text-uppercase">
-                                <h2 class="m-b-3">New Arrivals</h2>
-                            </div><!-- End .banner-layer -->
-                        </div><!-- End .home-slide -->
-                    </div><!-- End .home-slider -->
-                </div><!-- End .col-lg-9 -->
-            </div><!-- End .row -->
-
-            <div class="info-boxes-container row row-joined mb-1">
-                <div class="info-box info-box-icon-left col-lg-4">
-                    <i class="icon-shipping"></i>
-                    <div class="info-box-content">
-                        <h4>FREE SHIPPING &amp; RETURN</h4>
-                    </div><!-- End .info-box-content -->
-                </div><!-- End .info-box -->
-
-                <div class="info-box info-box-icon-left col-lg-4">
-                    <i class="icon-money"></i>
-                    <div class="info-box-content">
-                        <h4>MONEY BACK GUARANTEE</h4>
-                    </div><!-- End .info-box-content -->
-                </div><!-- End .info-box -->
-
-                <div class="info-box info-box-icon-left col-lg-4">
-                    <i class="icon-support"></i>
-                    <div class="info-box-content">
-                        <h4>ONLINE SUPPORT 24/7</h4>
-                    </div><!-- End .info-box-content -->
-                </div><!-- End .info-box -->
-            </div><!-- End .info-boxes-container -->
-
-            <div class="banners-grid text-uppercase grid" data-grid-options="{
-					'sortReorder': true
-				}">
-                <div class="banner banner1 grid-item banner-md-vw w-25 w-md-50 text-transform-none w-xxs-100" data-md-order="1">
-                    <figure>
-                        <img src="assets/images/banners/banner-1.jpg" alt="banner">
-                    </figure>
-
-                    <div class="banner-layer banner-layer-middle text-right">
-                        <h4 class="m-b-1 ls-n-10">Smart Devices</h4>
-                        <h3 class="mb-0 ls-10">Mega Sale</h3>
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="banner banner7 grid-item banner-md-vw w-50 w-md-100 order-lg-0 w-xxs-100" data-md-order="3">
-                    <figure>
-                        <img src="assets/images/banners/banner-7.jpg" alt="banner">
-                    </figure>
-
-                    <div class="banner-layer banner-layer-middle d-flex align-items-end flex-column">
-                        <h3 class="mb-2 text-white text-right ls-10">Headphone<br>Deals</h3>
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="banner banner4 grid-item banner-md-vw w-25 w-md-50 w-xxs-100" data-md-order="7">
-                    <figure>
-                        <img src="assets/images/banners/banner-4.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-middle text-right">
-                        <h2 class="m-b-2 text-secondary ls-n-20">Flash Sale</h2>
-                        <h3 class="m-b-2 ls-n-20">Top Brands<br>Mobile Accessories</h3>
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="banner banner5 grid-item banner-md-vw text-center w-25 w-md-50 w-xxs-100" data-md-order="8">
-                    <figure>
-                        <img src="assets/images/banners/banner-5.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-top">
-                        <h4 class="heading-border m-b-1">Amazing</h4>
-                        <h3 class="ls-n-10 mb-1">Collection</h3>
-                        <hr class="mb-1 mt-1">
-                    </div>
-
-                </div><!-- End .banner -->
-
-                <div class="banner banner2 grid-item banner-md-vw w-25 w-md-50 w-xxs-100" data-md-order="2">
-                    <figure>
-                        <img src="assets/images/banners/banner-2.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-top text-right">
-                        <h3 class="mb-0 ls-10">Trending</h3>
-                        <h2 class="m-b-3 ls-10 text-transform-none"> Sales</h2>
-
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="banner banner8 grid-item banner-md-vw w-50 w-md-100 w-xxs-100" data-md-order="4">
-                    <figure>
-                        <img src="assets/images/banners/banner-8.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-middle">
-                        <h3 class="m-b-2 text-transform-none">Exclusive To You</h3>
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="banner banner9 grid-item banner-md-vw text-center w-50 w-md-100 w-xxs-100" data-md-order="5">
-                    <figure>
-                        <img src="assets/images/banners/banner-9.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-middle banner-layer-left">
-                        <h4 class="m-b-3 text-body">Check our discounts</h4>
-                        <h3 class="text-nowrap">More than<span class="d-block mt-1 m-b-3">20 brands</span></h3>
-                        <hr class="mt-0 mb-2">
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="banner banner3 grid-item banner-md-vw w-25 w-md-50 w-xxs-100" data-md-order="9">
-                    <figure>
-                        <img src="assets/images/banners/banner-3.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-top text-center">
-                        <h2 class="m-b-1">Top Brands</h2>
-                        <h3 class="mb-1 pb-1">Smartphones</h3>
-                    </div>
-
-                </div><!-- End .banner -->
-
-                <div class="banner banner6 grid-item banner-md-vw w-25 w-md-50 w-xxs-100" data-md-order="6">
-                    <figure>
-                        <img src="assets/images/banners/banner-6.jpg" alt="banner">
-                    </figure>
-                    <div class="banner-layer banner-layer-middle text-center">
-                        <h3 class="m-b-1 ls-10">Deal Promos</h3>
-                    </div>
-                </div><!-- End .banner -->
-
-                <div class="grid-col-sizer w-25"></div>
-            </div><!-- End .banners-grid -->
-        </div><!-- End .container -->
-
-        <div class="mb-4"></div><!-- margin -->
-
-        <div class="products-section section-bg-gray">
-            <div class="container">
-                <h2 class="section-title">Featured Products</h2>
-                <div class=" owl-theme dots-top" id="featuredProductBlock">
+                        </tbody>
+                    </table>
 
                 </div>
+                <div class="col-lg-4">
+                    <div class="cart-summary">
+                        <div class="checkout-methods">
+                            <a href="javascript:" class="btn btn-block btn-sm btn-primary">Submit</a>
+                        </div><!-- End .checkout-methods -->
+                        <br />
+                        <div class="checkout-methods">
+                            <a href="products.html" class="btn btn-block btn-sm btn-primary">Continue to Products</a>
+                        </div><!-- End .checkout-methods -->
+                        <br />
+                        <div class="">
+                            <a href="javascript:" onclick="clearCart()" class="btn btn-sm btn-block btn-outline-secondary">Clear Cart</a>
+                        </div><!-- End .checkout-methods -->
+                    </div><!-- End .cart-summary -->
+                </div><!-- End .col-lg-4 -->
             </div>
-        </div>
 
+        </div><!-- End .container -->
+
+        <div class="mb-3"></div><!-- margin -->
     </main><!-- End .main -->
 
     <footer class="footer bg-dark">
@@ -397,7 +293,6 @@
         </div><!-- End .row -->
         </div><!-- End .container -->
         </div><!-- End .footer-middle -->
-
         <div class="container">
             <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap">
                 <div class="col-xs 6">
@@ -477,7 +372,6 @@
     <script src="assets/js/plugins.min.js"></script>
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
-    <script src="js/index.js"></script>
-
+    <script src="js/review.js"></script>
 </body>
 </html>
