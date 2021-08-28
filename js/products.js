@@ -1,11 +1,11 @@
 var sheetAPIBaseURL = "https://sheets.googleapis.com/v4/spreadsheets"
-var ExcelfileID = "1ydx9B9s00Jp_Q0PNjQOLERtUC-eAYm6S5_VKBDvBdwA";
-var apiKey = "AIzaSyALYSx_H8_qXnLRJvuql7GzfTZ3MvlLdqI";
+var ExcelfileID = "1QvHgvjouMiFIMZJoAdVPo6NHhLRQJlG_0mmn3B7Zc3E";
+var apiKey = "AIzaSyAmElMC6fNzymbUfgLF9_3r0GbIqwHjGyE";
 
 /*Read categories*/
 var categorySheetName = "Categories";
 var categoryFromRange = "A1";
-var categoryToRange = "A12";
+var categoryToRange = "A22";
 
 var readCategoryURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + categorySheetName + "!" + categoryFromRange + ":" + categoryToRange + "?key=" + apiKey;
 /*Read categories ends*/
@@ -13,14 +13,14 @@ var readCategoryURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + categor
 /*Read products*/
 var productSheetName = "Products";
 var productFromRange = "A1";
-var productToRange = "E12";
+var productToRange = "E22";
 var readProductURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + productSheetName + "!" + productFromRange + ":" + productToRange + "?key=" + apiKey;
 /*Read products ends*/
 
 /*Read products*/
 var productVariantsSheetName = "ProductVariants";
 var productVariantsFromRange = "A1";
-var productVariantsToRange = "F20";
+var productVariantsToRange = "F100";
 var readProductVariantsURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + productVariantsSheetName + "!" + productVariantsFromRange + ":" + productVariantsToRange + "?key=" + apiKey;
 /*Read products ends*/
 
