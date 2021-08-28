@@ -151,7 +151,7 @@ function loadReviewCart() {
             var variantList = $.map(cartObj[i], function (value, key) {
                 return [[key, value]];
             });
-            variantList = variantList.slice(2);
+            //variantList = variantList.slice(2);
             var variantBlock = '';
             for (var j = 0; j < variantList.length; j++) {
 
