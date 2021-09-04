@@ -144,13 +144,12 @@ function loadReviewCart() {
             var product = productResult.filter(function (obj) {
                 return (obj[1] == cartObj[i].ProductID);
             });
-            cartItemBlock += '<tr><td class="product-col"><figure class="product-image-container"><a href="javascript:" class="product-image"> <img id="reviewProductImage" src="ProductImages/' + product[0][3] + '" alt="product"> <input type="hidden" id="reviewProductID" /> </a> </figure> <div class="widget widget-categories"> <h4 class="widget-title">' + product[0][2] + '</h4> <ul class="list">@@VariantOptions</div> </td>  <td class="price-col">Quanitity: <span class="">' + cartObj[i].Quantity + '</span></td><td style="vertical-align:bottom"><button onclick="editCart(\'' + product[0][1] + '\')" class="btn btn-xs-edit btn-info" type="button"><i class="fa fa-edit"></i></button><br/><button onclick="deleteCartRow(\'' + cartObj[i].CartRowIndex + '\')" class="btn btn-xs-delete btn-danger" type="button"><i class="fa fa-trash"></i></button></td></tr>';
-
+            cartItemBlock += '<tr><td class="product-col"><figure class="product-image-container"><a href="javascript:" class="product-image"> <img id="reviewProductImage" src="ProductImages/' + product[0][3] + '" alt="product"> <input type="hidden" id="reviewProductID" /> </a> </figure> <div class="widget widget-categories"> <h4 class="widget-title">' + product[0][2] + '</h4> <ul class="list">@@VariantOptions</div> </td>  <td><div style="vertical-align:bottom; padding: 20px 0px 20px 0px;"><button onclick="editCart(\'' + product[0][1] + '\')" class="btn btn-xs-edit btn-info" type="button"><i class="fa fa-edit"></i></button></div><div style="vertical-align:bottom"> <button data-rowindex="' + cartObj[i].CartRowIndex + '" class="btn btn-xs-delete btn-danger" type="button"><i class="fa fa-trash"></i></button></div></td></tr>';
             var variantList = $.map(cartObj[i].cartItemVariant, function (value, key) {
                 return [[key, value]];
             });
 
-            var variantBlock = '';
+            var variantBlock = '<li><a href="javascript:">Quantity : <span class="">' + cartObj[i].Quantity + '</span></a></li>';
             for (var j = 0; j < variantList.length; j++) {
 
                 var currentVariant = productVariantsResult.filter(function (obj) {
@@ -228,17 +227,20 @@ function editCart(ProductID) {
     sessionStorage.setItem('cartProductToEdit', ProductID);
     window.location.href = "productdetails.html"
 }
-function deleteCartRow(cartRowIndex) {
 
-    if (confirm("Are you sure?")) {
+$(document).on('click', '.btn-xs-delete', function () {
+    $('#hdnValueToDelete').val($(this).attr('data-rowindex'))
+    $('#confirmDelete').modal('show');
+});
 
-        var cartObj = JSON.parse(localStorage.getItem("cart"));
-        cartObj = cartObj.filter(function (obj) {
-            return obj.CartRowIndex != cartRowIndex;
-        })
-        localStorage.setItem("cart", JSON.stringify(cartObj));
-        loadReviewCart();
-        updateCartCount();
-    }
-
+function deleteCartRow() {
+    var cartRowIndex = $('#hdnValueToDelete').val();
+    var cartObj = JSON.parse(localStorage.getItem("cart"));
+    cartObj = cartObj.filter(function (obj) {
+        return obj.CartRowIndex != cartRowIndex;
+    });
+    localStorage.setItem("cart", JSON.stringify(cartObj));
+    loadReviewCart();
+    updateCartCount();
+    $('#confirmDelete').modal('hide');
 }
