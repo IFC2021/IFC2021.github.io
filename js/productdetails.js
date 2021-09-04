@@ -281,17 +281,10 @@ function addRow() {
     });
 
     if (variantCollection.length > 0) {
-        variantTableTrBlock += '<td class="" data-variant="quantity"><input type="number" ';
-        variantTableTrBlock += 'class="form-input qty-number" style="height:34px;" ';
-        variantTableTrBlock += ' placeholder="Quantity"></td><td class="text-center"> ';
-        variantTableTrBlock += ' <button data-rowindex="' + (rowIndex + 1) 
-        variantTableTrBlock += ' " onclick="removeRow(this)" type="button" class="btn btn-danger btn-xs removeRow">';
-        variantTableTrBlock += ' <i class="fa fa-trash"></i></button> </td> </tr>';
+        variantTableTrBlock += '<td class="" data-variant="quantity"><input type="number" class="form-input qty-number" style="height:34px;" placeholder="Quantity"></td><td class="text-center"><button data-rowindex="' + (rowIndex + 1) + '" type="button" class="btn btn-danger btn-xs removeRow"><i class="fa fa-trash"></i></button> </td></tr>';
     }
     else {
-        variantTableTrBlock += '<td class="text-center" data-variant="quantity"><input type="number"';
-        variantTableTrBlock += '  class="form-input qty-number" style="height:34px;" placeholder="Quantity">';
-        variantTableTrBlock += ' </td></tr>';
+        variantTableTrBlock += '<td class="text-center" data-variant="quantity"><input type="number" class="form-input qty-number" style="height:34px;" placeholder="Quantity"></td></tr>';
 
     }
 
