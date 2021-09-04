@@ -57,14 +57,28 @@
                 -webkit-box-direction: normal;
                 -ms-flex-direction: column;
                 flex-direction: column;
-                border-bottom: 3px solid #08C;
+											  
                 display: block;
             }
+
+                .table-responsive-stack tr .last-odd {
+                    border-bottom: 3px solid #08C;
+                }
             /*  IE9 FIX   */
-            .table-responsive-stack td {
+            /*  .table-responsive-stack td {
                 float: left\9;
                 width: 100%;
+            }*/
+            /*  IE9 FIX   */
+            .table-responsive-stack td {
+                float: left;
+                width: 50%;
             }
+
+                .table-responsive-stack td.last-odd {
+                    float: left;
+                    width: 100%;
+                }
         }
     </style>
 
@@ -456,33 +470,25 @@
         </div><!-- End .mobile-menu-wrapper -->
     </div><!-- End .mobile-menu-container -->
 
-    <div class="modal fade" id="quickView" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade" id="confirmDelete" role="dialog" style="background-color:rgba(0,0,0,0.7)">
+        <div class="modal-dialog delete-modal-sm">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="row row-sparse">
-                        <div class="col-lg-6">
-                            <div class="">
-                                <div class="product-item">
-                                    <img class="product-single-image" id="quickViewProductImage" />
+                        <div class="col-xs-12">
+                            <h6>Are you sure to delete?</h6>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-xs btn-danger" onclick="removeRow()">Delete</button>
                                 </div>
-                                <!-- End .product-single-carousel -->
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-xs" data-dismiss="modal">Cancel</button>
+                                </div>
                             </div>
-
+                            <input type="hidden" id="hdnValueToDelete" />
                         </div><!-- End .product-single-gallery -->
-
-                        <div class="col-lg-6 product-single-details">
-                            <h1 class="product-title" id="quickViewProductName">Product Name</h1>
-                            <hr class="divider">
-                            <div class="product-desc">
-                                <p id="quickViewProductDescription"></p>
-                            </div><!-- End .product-desc -->
-                        </div><!-- End .product-single-details -->
                     </div><!-- End .row -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
