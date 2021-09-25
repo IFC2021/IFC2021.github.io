@@ -171,8 +171,8 @@ function getOrderString(){
                 return (obj[2] == variantList[j][1] && obj[0] == cartObj[i].ProductID);
             });  
             attrVal += variantList[j][0] + ": " + currentVariant[0][4] + ", ";
-            }
         }
+        
         sResponse += prodName + ": [QTY: " + sQTY + ", " + attrVal  + "];";
 
     }
