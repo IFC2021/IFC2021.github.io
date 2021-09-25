@@ -146,11 +146,35 @@ function clearCart() {
     }, 1000);
 }
 /*Section - Clear cart*/
+
+function getOrderString(){
+   var cartObj = [];
+   var sResponse="";
+   if (localStorage.getItem("cart") != null && localStorage.getItem("cart") != '' && localStorage.getItem("cart") != "[]") {
+    cartObj = JSON.parse(localStorage.getItem("cart"));
+   }
+   if (cartObj.length > 0) {
+    for (var i = 0; i < cartObj.length; i++) {
+        //Loop thru cart object for each product and prepares the row for each products
+
+        var product = productResult.filter(function (obj) {
+            return (obj[1] == cartObj[i].ProductID);
+        });
+        var prodName = product[0][2];
+        var sQTY = cartObj[i].Quantity;
+        sResponse += prodName + ": [QTY: " + sQTY + "];"
+
+    }
+    return sResponse;
+   }
+
+}
+
 function showAndroidToast(toast) {
     if(typeof Android !== "undefined" && Android !== null) {
         Android.TestDirectWA2(toast);
     } else {
-        alert("Not viewing in webview");
+        alert("Not viewing in webview " + toast);
     }
 }
 /* submit order.*/
@@ -158,7 +182,9 @@ function submitOrder() {
 
     var existingCart = JSON.parse(localStorage.getItem("cart"));
     /* moves current cart to previous cart */
-    showAndroidToast('Order:' + existingCart);
+    var cartString = getOrderString();
+    console.log("See " + cartString);
+    showAndroidToast('Order:' + cartString);
     localStorage.setItem("previousCart", JSON.stringify(existingCart));
 
     $("#msg-container").removeClass('hide');
