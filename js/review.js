@@ -184,7 +184,7 @@ function submitOrder() {
     /* moves current cart to previous cart */
     var cartString = getOrderString();
     console.log("See " + cartString);
-    showAndroidToast('Order:' + cartString);
+    showAndroidToast('Order => ' + cartString);
     localStorage.setItem("previousCart", JSON.stringify(existingCart));
 
     $("#msg-container").removeClass('hide');
