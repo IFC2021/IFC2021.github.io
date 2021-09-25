@@ -148,7 +148,7 @@ function clearCart() {
 /*Section - Clear cart*/
 function showAndroidToast(toast) {
     if(typeof Android !== "undefined" && Android !== null) {
-        android.showToast(toast);
+        Android.showToast(toast);
     } else {
         alert("Not viewing in webview");
     }
