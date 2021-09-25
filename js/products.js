@@ -50,6 +50,7 @@ $(document).ready(function () {
 function refreshData() {
     getCategoriesAjax();
     getProductsAjax();
+    getProductVariantsAjax();
     window.location.href = "products.html";
 }
 function loadProductsSideBarCategories(categories) {
