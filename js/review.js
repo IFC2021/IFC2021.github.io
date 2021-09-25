@@ -146,12 +146,19 @@ function clearCart() {
     }, 1000);
 }
 /*Section - Clear cart*/
-
+function showAndroidToast(toast) {
+    if(typeof Android !== "undefined" && Android !== null) {
+        android.showToast(toast);
+    } else {
+        alert("Not viewing in webview");
+    }
+}
 /* submit order.*/
 function submitOrder() {
 
     var existingCart = JSON.parse(localStorage.getItem("cart"));
     /* moves current cart to previous cart */
+    showAndroidToast('Order:' + existingCart);
     localStorage.setItem("previousCart", JSON.stringify(existingCart));
 
     $("#msg-container").removeClass('hide');
