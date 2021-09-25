@@ -161,8 +161,19 @@ function getOrderString(){
             return (obj[1] == cartObj[i].ProductID);
         });
         var prodName = product[0][2];
+        var variantList = $.map(cartObj[i].cartItemVariant, function (value, key) {
+            return [[key, value]];
+        });
         var sQTY = cartObj[i].Quantity;
-        sResponse += prodName + ": [QTY: " + sQTY + "];"
+        var attrVal="";
+        for (var j = 0; j < variantList.length; j++) {
+            var currentVariant = productVariantsResult.filter(function (obj) {
+                return (obj[2] == variantList[j][1] && obj[0] == cartObj[i].ProductID);
+            });  
+            attrVal += variantList[j][0] + ": " + currentVariant[0][4] + ", ";
+            }
+        }
+        sResponse += prodName + ": [QTY: " + sQTY + ", " + attrVal  + "];";
 
     }
     return sResponse;
