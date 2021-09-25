@@ -48,6 +48,29 @@
             width: auto;
             height: auto;
         }
+		.inner-icon figure .btn-icon-buy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 0 5px;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            /* opacity: 0; */
+            /* visibility: hidden; */
+            transition: all .3s;
+            transform: none;
+            padding: 0 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: Poppins,sans-serif;
+            line-height: 34px;
+            text-align: center;
+            vertical-align: top;
+            cursor: pointer;
+            transition: all .25s ease;
+        }
     </style>
 
 </head>
@@ -150,7 +173,7 @@
     </header><!-- End .header -->
 
     <main class="main">
-        <div class="category-banner-container bg-gray">
+        <!-- <div class="category-banner-container bg-gray">
             <div class="category-banner banner text-uppercase" 
             style="background: no-repeat 60%/cover url('assets/images/banners/banner-top3.jpg');">
                 <div class="container position-relative">
@@ -163,7 +186,7 @@
                 </div>
             </div>
         </div>
-
+ -->
         <div class="container" style="min-height:510px;">
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <ol class="breadcrumb">
@@ -175,28 +198,29 @@
 
             <div class="row">
                 <div class="col-lg-9 main-content">
-                    <nav class="toolbox">
-                        <div class="toolbox-left">
+                    <nav class="toolbox row">
+                        <div class="col-md-6">
+                            <div class="toolbox-left">
+                                <div class="toolbox-item">
+                                    <button class="btn btn-info btn-sm" id="btnRefresh" style="padding: 7px 11px !important" onclick="refreshData()" title="Refresh">
+                                        <i class="fa fa-sync"></i>&nbsp; Refresh
+                                    </button>
+                                    <!--<button class="btn btn-danger btn-sm" onclick="showQuickBuy()">Open</button>-->
+                                </div><!-- End .layout-modes -->
+                            </div><!-- End .toolbox-left -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="toolbox-right row">
+                                <div class="toolbox-item toolbox-show col-md-12">
+                                    <input type="text" id="txtSearch" class="form-input col-md-12" style="height:34px" placeholder="Search Anything..." />
+                                </div><!-- End .toolbox-item -->
 
-                        </div><!-- End .toolbox-left -->
-
-                        <div class="toolbox-right">
-                            <div class="toolbox-item toolbox-show">
-                                <input type="text" id="txtSearch" class="form-input" style="height:34px" placeholder="Search" />
-                            </div><!-- End .toolbox-item -->
-                            <div class="toolbox-item toolbox-show">
-                                |
-                            </div><!-- End .toolbox-item -->
-
-                            <div class="toolbox-item">
-                                <button class="btn btn-info" style="padding: 7px 11px !important" onclick="refreshData()" title="Refresh">
-                                    <i class="fa fa-sync"></i>
-                                </button>
-
-                            </div><!-- End .layout-modes -->
-                        </div><!-- End .toolbox-right -->
+                            </div><!-- End .toolbox-right -->
+                        </div>									 
                     </nav>
+                    <hr style="margin: 2rem auto 2.5rem !important" />
                     <div class="row" id="productBlock">
+                        <!-- Products will be loaded here-->
 
                     </div><!-- End .row -->
                 </div><!-- End .col-lg-9 -->
@@ -295,7 +319,7 @@
                     <p class="footer-copyright py-3 pr-4 mb-0">© Company. 2021. All Rights Reserved</p>
                 </div>
                 <div class="col-xs 6 text-right">
-                    <p class="footer-copyright py-3 pr-4 mb-0">v 1.18</p>
+                    <p class="footer-copyright py-3 pr-4 mb-0">v 1.22</p>
                     <a href="#userAgent" data-toggle="collapse" onclick="getUserAgent()">User Agent</a>
                     <div id="userAgent" class="collapse">
                     </div>
@@ -329,35 +353,10 @@
         </div><!-- End .mobile-menu-wrapper -->
     </div><!-- End .mobile-menu-container -->
 
-    <div class="modal fade" id="quickView" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row row-sparse">
-                        <div class="col-lg-6">
-                            <div class="">
-                                <div class="product-item">
-                                    <img class="product-single-image" id="quickViewProductImage" />
-                                </div>
-                                <!-- End .product-single-carousel -->
-                            </div>
-
-                        </div><!-- End .product-single-gallery -->
-
-                        <div class="col-lg-6 product-single-details">
-                            <h1 class="product-title" id="quickViewProductName">Product Name</h1>
-                            <hr class="divider">
-                            <div class="product-desc">
-                                <p id="quickViewProductDescription"></p>
-                            </div><!-- End .product-desc -->
-                        </div><!-- End .product-single-details -->
-                    </div><!-- End .row -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+    <div id="quickBuyViewPopup">
+        <div class="downupPopup-content">
+            <iframe id="quickBuyView" src="productdetailstray.html" frameBorder="0" style="width:100%; min-height:70vh;">
+            </iframe>
 
         </div>
     </div>
@@ -365,11 +364,12 @@
     <!-- Plugins JS File -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/optional/isotope.pkgd.min.js"></script>
     <script src="assets/js/plugins.min.js"></script>
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/products.js"></script>
+    <script src="assets/downupPopup/downupPopup.js"></script>
 
 </body>
 </html>
