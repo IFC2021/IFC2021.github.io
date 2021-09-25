@@ -183,7 +183,7 @@ function submitOrder() {
     var existingCart = JSON.parse(localStorage.getItem("cart"));
     /* moves current cart to previous cart */
     var cartString = getOrderString();
-    console.log("See " + cartString);
+    //console.log("See " + cartString);
     showAndroidToast('Order => ' + cartString);
     localStorage.setItem("previousCart", JSON.stringify(existingCart));
 
