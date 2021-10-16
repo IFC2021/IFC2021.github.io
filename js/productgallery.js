@@ -1,6 +1,6 @@
 var variantCollection = [];
 var slideIndex = 1;
-var productImageBasePath = "https://responsivedevsites.github.io";
+
 
 $(document).ready(function () {
 
