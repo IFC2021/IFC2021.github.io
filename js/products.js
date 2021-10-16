@@ -1,3 +1,4 @@
+var variantCollection = [];
 
 $(document).ready(function () {
 
