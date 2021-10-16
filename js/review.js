@@ -187,7 +187,9 @@ function submitOrder() {
     OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
     Order.push(OrderObj);
 
-																
+    var cartString = getOrderString();
+    //console.log("See " + cartString);
+	showAndroidToast('Order => ' + cartString);															
     /* moves current order to previous cart */
 									  
 									   
