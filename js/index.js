@@ -39,7 +39,7 @@ function loadFeaturedProducts(products) {
     var featuredProductBlock = '';
     for (var i = 0; i < 8; i++) {
         var product = products[Math.floor(Math.random() * products.length)];
-        featuredProductBlock += '<div class="product-default inner-quickview inner-icon"><figure><a onclick="navigateToProductDetails(\'' + product[1] + '\')\" href="javascript:"><img src="ProductImages/' + product[3] + '"></a>  </figure> <div class="product-details"> <div class="category-wrap"> <div class="category-list"> <a href="javascript:" class="product-category">' + product[0] + '</a> </div> </div> <h3 class="product-title"> <a href="productdetails.html">' + product[2] + '</a> </h3>  </div></div>';
+        featuredProductBlock += '<div class="product-default inner-quickview inner-icon"><figure><a onclick="navigateToProductDetails(\'' + product[1] + '\')\" href="javascript:"><img src="ProductImages/' + products[i][3] + '/1.jpg"></a>  </figure> <div class="product-details"> <div class="category-wrap"> <div class="category-list"> <a href="javascript:" class="product-category">' + product[0] + '</a> </div> </div> <h3 class="product-title"> <a href="productdetails.html">' + product[2] + '</a> </h3>  </div></div>';
     }
 
     $('#featuredProductBlock').html(featuredProductBlock);

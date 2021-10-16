@@ -67,6 +67,7 @@ function getProductVariantsAjax() {
         type: "GET",
         url: readProductVariantsURL,
         cache: false,
+		async: false,			 
         dataType: "json",
         success: function (data) {
             productVariantsResult = data.values.slice(1); //removed first row. it contains column title

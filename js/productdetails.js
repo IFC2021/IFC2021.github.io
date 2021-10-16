@@ -78,7 +78,7 @@ function loadProductDetails() {
             return (obj[0] === productID)
         });
 
-        $('#productDetailImage').attr('src', 'ProductImages/' + product[0][3]);
+        $('#productDetailImage').attr('src', 'ProductImages/' + product[0][3] + '/1.jpg');
         $('#productDetailProductName').html(product[0][2]);
         $('#productDetailProductDescription').html(product[0][4]);
 
@@ -128,6 +128,7 @@ function loadProductDetails() {
                 return (obj.ProductID === productIDtoEdit)
             });
 
+			$('#txtProductComments').val(existingCart[0].ProductComment);															 
             /* loop to create table rows with existing cart items */
 
             for (var i = 0; i < existingCart.length; i++) {
@@ -287,6 +288,7 @@ function addToCart(finalize) {
         today = dd + '-' + mm + '-' + yyyy;
         cartItem["CreatedDate"] = today;
         cartItem["CartRowIndex"] = '';
+		cartItem["ProductComment"] = $('#txtProductComments').val().trim();																   
 
         $(object).find('td').each(function (ind, obj) {
 
@@ -360,19 +362,12 @@ function addToCart(finalize) {
         /*finally stores cart in local storage*/
         localStorage.setItem("cart", JSON.stringify(cartObj));
 
-        /*if add and finalized button clicked, it redirects to review page*/
-        if (finalize == "iframe-false") {
-            $('#quickBuyView').closest('#quickBuyViewPopup').downupPopup('close');
-        }
-        if (finalize == "iframe-true") {
-            window.parent.location.href = "review.html";
-        }
-        else if (finalize == 'true') {
+        if (finalize == 'true') {
             window.location.href = "review.html"
         }
         $('#validationMsg').removeClass('alert alert-danger');
         $('#validationMsg').addClass('alert alert-success');
-        $('#validationMsg').html('Item added..')
+        $('#validationMsg').html('Item saved to cart..')
     }
     else {
 
@@ -479,15 +474,48 @@ function formatOptions(option) {
     if (!option.id) {
         return option.text;
     }
-    var $option = $(
-        '<span><i class="fa fa-square" style="font-size:20px; color:' + option.element.value.toLowerCase() + '" /> ' + option.text + '</span>'
-    );
+    var $option = '';
+
+    if (option.element.value.toLowerCase().indexOf('x') == -1) {
+        $option = $(
+            '<div><span style="height:18px; width:18px; margin-right:3px; display:inline-block; border:solid 1px black; background-color:' + option.element.value.toLowerCase() + '" ></span>' + option.text + '</div>'
+        );
+
+    } else {
+        $option = $(
+            '<div><span style="height:18px; width:18px; margin-right:3px; display:inline-block;" ></span>' + option.text + '</div>'
+        );
+    }
+
     return $option;
 };
+
+function navigateToProductGallery() {
+    sessionStorage.setItem("productGalleryProductID", $('#hdnProductID').val());
+    window.location.href = "productgallery.html";
+}
 
 /*on color selection, this is to show selected color box after the dropdown in grid*/
 $(document).on('select2:select', '.custom-ddl-color', function (e) {
     $(this).parent().find('#selectedColorSample').remove();
-    $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block;background-color:' + $(this).val() + ';height:15px;width:15px; margin-left:10px"></span>')
+	if ($(this).val().toLowerCase().indexOf('x') == -1) {
+        $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block; border:solid 1px black; background-color:' + $(this).val() + '; height:15px; width:15px; margin-left:10px"></span>')
+    }													 
 });
 
+$(document).on('blur', '.qty-number', function () {
+    if ($(this).val() != '') {
+        var productID = $('#hdnProductID').val();
+        var product = productResult.filter(function (obj) {
+            return (obj[1] === productID)
+        });
+        var roundToNext = product[0][5];
+        if (roundToNext != null) {
+            var roundValue = roundToNext.match(/(\d+)/);
+            if (roundValue) {
+                $(this).val((Math.ceil($(this).val() / roundValue[0]) * roundValue[0]));
+            }
+        }
+    }
+
+});

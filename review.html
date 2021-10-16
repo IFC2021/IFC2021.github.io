@@ -135,6 +135,11 @@
                 width: 30%;
             }
         }
+		#txtOrderComments {
+            max-width: none !important;
+            min-height: auto !important;
+            padding: 7px !important;
+        }
     </style>
 
 </head>
@@ -258,6 +263,10 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="cart-summary">
+						<div id="divComments">
+                            <label for="txtOrderComments">Comments (if any)</label>
+                            <textarea id="txtOrderComments" rows="2" maxlength="255" class="form-control"> </textarea>
+                        </div>							  
                         <div class="checkout-methods">
                             <a href="javascript:" onclick="submitOrder()" id="btnSubmitOrder" class="btn btn-block btn-sm btn-primary">Submit</a>
                         </div><!-- End .checkout-methods -->
@@ -272,7 +281,8 @@
                         </div><!-- End .checkout-methods -->
                         <br />
                         <div>
-                            <a href="javascript:" id="btnClearCart" onclick="confirmClearCart()" class="btn btn-sm btn-block btn-outline-secondary">Clear Cart(s)</a>
+                            <a href="javascript:" id="btnClearPreviousCart" onclick="confirmClearCart('previous-cart')" class="btn btn-sm btn-block btn-outline-secondary hide">Clear Cart</a>
+                            <a href="javascript:" id="btnClearCurrentCart" onclick="confirmClearCart('current-cart')" class="btn btn-sm btn-block btn-outline-secondary">Clear Cart</a>
                         </div><!-- End .checkout-methods -->
                         <br />
                         <div>
@@ -361,7 +371,7 @@
                     <p class="footer-copyright py-3 pr-4 mb-0">© Company. 2021. All Rights Reserved</p>
                 </div>
                 <div class="col-xs 6 text-right">
-                    <p class="footer-copyright py-3 pr-4 mb-0">v 1.24</p>
+                    <p class="footer-copyright py-3 pr-4 mb-0">v 1.29</p>
                     <a href="#userAgent" data-toggle="collapse" onclick="getUserAgent()">User Agent</a>
                     <div id="userAgent" class="collapse">
                     </div>
@@ -427,7 +437,7 @@
                 <div class="modal-body">
                     <div class="row row-sparse">
                         <div class="col-xs-12">
-                            <h6>Are you sure to clear cart(s)?</h6>
+                            <h6>Are you sure to clear cart?</h6>
                             <div class="row">
                                 <div class="col-xs-6">
                                     <button type="button" class="btn btn-xs btn-danger" onclick="clearCart()">Clear</button>

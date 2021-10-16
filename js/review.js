@@ -44,7 +44,16 @@ function loadReviewCart() {
     if (sessionStorage.getItem("showPreviousCart") == "1") {
         //checks if call is to show previous cart, then assign previous cart object to cartObj
         if (localStorage.getItem("previousCart") != null && localStorage.getItem("previousCart") != '' && localStorage.getItem("previousCart") != "[]") {
-            cartObj = JSON.parse(localStorage.getItem("previousCart"));
+            cartObj = JSON.parse(localStorage.getItem("previousCart"))[0].Cart; // Order json will contain only one row, so [0]th position.
+            $('#txtOrderComments').val(JSON.parse(localStorage.getItem("previousCart"))[0].OrderComment);
+            $('#txtOrderComments').attr('disabled', 'disabled');
+
+            $('#btnClearPreviousCart').removeClass('hide');
+            $('#btnClearCurrentCart').addClass('hide');
+            $('#btnSubmitOrder').addClass('hide');
+        }
+        else {
+            $('#btnClearPreviousCart').addClass('hide');
         }
 
     }
@@ -52,10 +61,16 @@ function loadReviewCart() {
         //else shows current cart
         if (localStorage.getItem("cart") != null && localStorage.getItem("cart") != '' && localStorage.getItem("cart") != "[]") {
             cartObj = JSON.parse(localStorage.getItem("cart"));
+            $('#btnClearPreviousCart').addClass('hide');
+            $('#btnClearCurrentCart').removeClass('hide');
+            $('#btnSubmitOrder').removeClass('hide');
+        }
+        else {
+            $('#btnClearCurrentCart').addClass('hide');
         }
         if (localStorage.getItem("previousCart") == null || localStorage.getItem("previousCart") == '' || localStorage.getItem("previousCart") == "[]") {
-            $('#btnShowPreviousCart').hide();
-            $('#btnShowCurrentCart').hide();
+            $('#btnShowPreviousCart').addClass('hide');
+            $('#btnShowCurrentCart').addClass('hide');
         }
     }
     if (cartObj.length > 0) {
@@ -85,14 +100,21 @@ function loadReviewCart() {
                 });
 
                 if (variantList[j][0] == "Color") {
-
-                    variantBlock += '<li><a href="javascript:">Color:  <span class="">' + currentVariant[0][4] + '</span> | <div style="background-color: ' + variantList[j][1] + '; height: 20px; width: 20px; display: inline-block; margin-bottom: -5px;"></div></a> </li>';
+                    if (currentVariant[0][4].toLowerCase().indexOf('x') == -1) {
+                        variantBlock += '<li><a href="javascript:">Color:  <span class="">' + currentVariant[0][4] + '</span> | <div style="background-color: ' + variantList[j][1] + '; height: 20px; width: 20px; display: inline-block; margin-bottom: -5px; border:solid 1px black"></div></a> </li>';
+                    }
+                    else {
+                        variantBlock += '<li><a href="javascript:">Color:  <span class="">' + currentVariant[0][4] + '</span></li>';
+                    }
                 }
                 else {
                     variantBlock += '<li><a href="javascript:">' + variantList[j][0] + ': <span class="">' + currentVariant[0][4] + '</span></a></li>';
                 }
             }
             variantBlock += '<li><a href="javascript:">Created Date: <span class="">' + cartObj[i].CreatedDate + '</span></a></li>';
+            if (cartObj[i].ProductComment != '') {
+                variantBlock += '<li><a href="javascript:">Comments: <span class="">' + cartObj[i].ProductComment + '</span></a></li>';
+            }
 
             /*Completes the <tr> by replacing @@VariantOptions with prepared <li> list of variants*/
             cartItemBlock = cartItemBlock.replace("@@VariantOptions", variantBlock);
@@ -108,7 +130,8 @@ function loadReviewCart() {
         else {
             $('#reviewCart').html('<tr><td  colspan="3">No Items..</td></tr>');
         }
-        $('#btnSubmitOrder').addClass('disabled');
+        $('#btnSubmitOrder').addClass('hide');
+        $('#divComments').addClass('hide');
     }
     if (sessionStorage.getItem("showPreviousCart") == "1") {
         //if previous cart is loaded. all unwanted buttons are hidden.
@@ -124,13 +147,19 @@ function loadReviewCart() {
 }
 
 /*Section - clear cart*/
-function confirmClearCart() {
+function confirmClearCart(cartType) {
+    $('#hdnCartTypeToDelete').val(cartType);
     $('#confirmClearCart').modal('show');
 }
 function clearCart() {
     $('#confirmClearCart').modal('hide');
-    localStorage.setItem("cart", '');
-    localStorage.setItem("previousCart", '');
+    if ($('#hdnCartTypeToDelete').val() == 'current-cart') {
+        localStorage.setItem("cart", '');
+    }
+    else if ($('#hdnCartTypeToDelete').val() == 'previous-cart') {
+        localStorage.setItem("previousCart", '');
+    }
+
     $('#btnSubmitOrder').addClass('disabled');
     $('#reviewCart').html('<tr><td  colspan="3">No Items..</td></tr>');
     updateCartCount();
@@ -146,6 +175,70 @@ function clearCart() {
     }, 1000);
 }
 /*Section - Clear cart*/
+
+
+/* submit order.*/
+function submitOrder() {
+    var Order = [];
+
+    var OrderObj = {};
+
+    OrderObj.OrderComment = $('#txtOrderComments').val().trim();
+    OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
+    Order.push(OrderObj);
+
+																
+    /* moves current order to previous cart */
+									  
+									   
+											   
+    localStorage.setItem("previousCart", JSON.stringify(Order));
+
+    $("#msg-container").removeClass('hide');
+    $("#msg").html('Submitted successfully...')
+    window.setInterval(function () {
+        var timeLeft = $("#timeLeft").html();
+        if (eval(timeLeft) == 0) {
+            /*clears current cart and redirects to products page*/
+            localStorage.setItem("cart", '');
+            window.location.href = "products.html";
+        } else {
+            $("#timeLeft").html(eval(timeLeft) - eval(1));
+        }
+    }, 1000);
+}
+
+
+function editCart(ProductID) {
+    /*set product id to storage and redirects to product details. value of cartProductToEdit is used in product detail page to decide of call is from edit cart*/
+    sessionStorage.setItem('cartProductToEdit', ProductID);
+    window.location.href = "productdetails.html"
+}
+/*Section - Delete item from cart*/
+$(document).on('click', '.btn-xs-delete', function () {
+    $('#hdnValueToDelete').val($(this).attr('data-rowindex'))
+    $('#confirmDelete').modal('show');
+});
+function deleteCartRow() {
+    var cartRowIndex = $('#hdnValueToDelete').val();
+    var cartObj = JSON.parse(localStorage.getItem("cart"));
+    cartObj = cartObj.filter(function (obj) {
+        return obj.CartRowIndex != cartRowIndex;
+    });
+    localStorage.setItem("cart", JSON.stringify(cartObj));
+    loadReviewCart();
+    updateCartCount();
+    $('#confirmDelete').modal('hide');
+}
+/*Section ends - Delete item from cart*/
+
+/*Show previous cart or current cart*/
+function switchCart(showPreviousCart) {
+    if (showPreviousCart) {
+        sessionStorage.setItem("showPreviousCart", "1");
+    }
+    window.location.href = "review.html";
+}
 
 function getOrderString(){
    var cartObj = [];
@@ -180,6 +273,7 @@ function getOrderString(){
    }
 
 }
+																
 
 function showAndroidToast(toast) {
     if(typeof Android !== "undefined" && Android !== null) {
@@ -187,57 +281,4 @@ function showAndroidToast(toast) {
     } else {
         alert("Not viewing in webview " + toast);
     }
-}
-/* submit order.*/
-function submitOrder() {
-
-    var existingCart = JSON.parse(localStorage.getItem("cart"));
-    /* moves current cart to previous cart */
-    var cartString = getOrderString();
-    //console.log("See " + cartString);
-    showAndroidToast('Order => ' + cartString);
-    localStorage.setItem("previousCart", JSON.stringify(existingCart));
-
-    $("#msg-container").removeClass('hide');
-    $("#msg").html('Submitted successfully...')
-    window.setInterval(function () {
-        var timeLeft = $("#timeLeft").html();
-        if (eval(timeLeft) == 0) {
-            /*clears current cart and redirects to products page*/
-            localStorage.setItem("cart", '');
-            window.location.href = "products.html";
-        } else {
-            $("#timeLeft").html(eval(timeLeft) - eval(1));
-        }
-    }, 1000);
-}
-function editCart(ProductID) {
-    /*set product id to storage and redirects to product details. value of cartProductToEdit is used in product detail page to decide of call is from edit cart*/
-    sessionStorage.setItem('cartProductToEdit', ProductID);
-    window.location.href = "productdetails.html"
-}
-/*Section - Delete item from cart*/
-$(document).on('click', '.btn-xs-delete', function () {
-    $('#hdnValueToDelete').val($(this).attr('data-rowindex'))
-    $('#confirmDelete').modal('show');
-});
-function deleteCartRow() {
-    var cartRowIndex = $('#hdnValueToDelete').val();
-    var cartObj = JSON.parse(localStorage.getItem("cart"));
-    cartObj = cartObj.filter(function (obj) {
-        return obj.CartRowIndex != cartRowIndex;
-    });
-    localStorage.setItem("cart", JSON.stringify(cartObj));
-    loadReviewCart();
-    updateCartCount();
-    $('#confirmDelete').modal('hide');
-}
-/*Section ends - Delete item from cart*/
-
-/*Show previous cart or current cart*/
-function switchCart(showPreviousCart) {
-    if (showPreviousCart) {
-        sessionStorage.setItem("showPreviousCart", "1");
-    }
-    window.location.href = "review.html";
 }

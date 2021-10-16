@@ -79,6 +79,15 @@
                     width: 100%;
                 }
         }
+		#txtProductComments {
+            max-width: none !important;
+            min-height: auto !important;
+            padding: 7px !important;
+        }
+
+        #productDetailImage {
+            cursor: pointer;
+        }
     </style>
 
 
@@ -312,6 +321,17 @@
                                     <div class="">
                                         <div class="product-item">
                                             <img id="productDetailImage" class="img-responsive" />
+                                            <div class="row">
+                                                <div class="col-md-3">
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a href="javascript:" onclick="navigateToProductGallery()" class="btn btn-info btn-xs" title="view">
+                                                        More Images
+                                                    </a>
+                                                </div>
+
+                                            </div>
                                         </div>
                                         <!-- End .product-single-carousel -->
                                     </div>
@@ -355,7 +375,12 @@
 
                                                 <br />
                                                 <div class="row">
-
+												<div class="col-md-12">
+                                                        <label for="txtProductComments">Product comments (if any)</label>
+                                                        <textarea id="txtProductComments" rows="1" maxlength="100" class="form-control">  </textarea>
+                                                    </div>
+                                                </div>
+                                                <br />
                                                     <div class="col-md-12 text-center">
                                                         <div class="btn-group">
                                                             <button type="button" onclick="addToCart()" class="btn col-xs-12 btn-dark add-cart icon-shopping-cart">Save to Cart</button>
@@ -465,7 +490,7 @@
                     <p class="footer-copyright py-3 pr-4 mb-0">© Company. 2021. All Rights Reserved</p>
                 </div>
                 <div class="col-xs 6 text-right">
-                    <p class="footer-copyright py-3 pr-4 mb-0">v 1.22</p>
+                    <p class="footer-copyright py-3 pr-4 mb-0">v 1.29</p>
                     <a href="#userAgent" data-toggle="collapse" onclick="getUserAgent()">User Agent</a>
                     <div id="userAgent" class="collapse">
                     </div>
