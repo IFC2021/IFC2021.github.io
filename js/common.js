@@ -28,7 +28,7 @@ var readProductVariantsURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + 
 var categoryResult = null;
 var productResult = null;
 var productVariantsResult = null;
-var productImageBasePath = "https://ifc2021.github.io";
+
 
 /*Function to fetch product categories*/
 function getCategoriesAjax() {

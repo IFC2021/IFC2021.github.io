@@ -1,6 +1,6 @@
 var variantCollection = [];
 var slideIndex = 1;
-
+var productImageBasePath = "https://ifc2021.github.io";
 
 $(document).ready(function () {
 
