@@ -38,7 +38,7 @@ function loadProductGallery() {
         var url = productImageBasePath + '/ProductImages/' + product[0][3] + '/' + i + '.jpg';
 
         if (urlExists(url) == 200) {
-            productImageBlock += '<div class="mySlides"><img src="ProductImages/' + product[0][3] + '/' + i + '.jpg" class="img-responsive img-thumbnail" style="width:100%"></div>';
+            productImageBlock += '<div class="mySlides"><img src="ProductImages/' + product[0][3] + '/' + i + '.jpg" class="img-aspect img-thumbnail" style="width:100%"></div>';
             productThumbnailBlock += '<div class="column"><img class="demo cursor" src="ProductImages/' + product[0][3] + '/' + i + '.jpg" style="width:100%" onclick="currentSlide(' + i + ')"></div>';
         }
         else {
@@ -87,5 +87,18 @@ function showSlides(n) {
     dots[slideIndex - 1].className += " active";
     //captionText.innerHTML = dots[slideIndex - 1].alt;
 }
+
+jquerySwipeHandler.handleSwipe("#slider-img-list", [
+    jquerySwipeHandler.SWIPE_LEFT,
+], function (direction) {
+    plusSlides(1)
+    console.log("swipe: ", direction);
+});
+jquerySwipeHandler.handleSwipe("#slider-img-list", [
+    jquerySwipeHandler.SWIPE_RIGHT,
+], function (direction) {
+    plusSlides(-1)
+    console.log("swipe: ", direction);
+});
 
 
