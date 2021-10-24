@@ -35,7 +35,31 @@ $(document).ready(function () {
     updateCartCount();
 
 });
+//----------------------------------------------------------------------------------------------------
+function ChkAllImages(prodID){
+    var productImageBasePath = window.location.protocol + "//" + window.location.hostname;
+    var product = productResult.filter(function (obj) {
+        return (obj[1] === prodID)
+    });
+    var kounter1 = 0;
+    for (var i = 1; i < 11; i++) {
 
+        var url = productImageBasePath + '/ProductImages/' + product[0][3] + '/' + i + '.jpg';
+
+        if (urlExists(url) == 200) {
+            kounter1++;
+        }
+        else {
+            break;
+        }
+
+    }
+    if (kounter1 > 1){
+        console.log(productImageBasePath + '/ProductImages/' + product[0][3] + '/' + 'got more images!!!');
+    }
+
+}
+//----------------------------------------------------------------------------------------------------
 /* function to load product details and add to cart grid */
 function loadProductDetails() {
 
@@ -81,7 +105,7 @@ function loadProductDetails() {
         $('#productDetailImage').attr('src', 'ProductImages/' + product[0][3] + '/1.jpg');
         $('#productDetailProductName').html(product[0][2]);
         $('#productDetailProductDescription').html(product[0][4]);
-
+        ChkAllImages(productID);
         /*gets the array of distinct variant list from product details. eg. color, thickness */
 
         for (var i = 0; i < productDetails.length; i++) {

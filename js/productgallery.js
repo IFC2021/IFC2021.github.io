@@ -92,11 +92,11 @@ jquerySwipeHandler.handleSwipe("#slider-img-list", [
     jquerySwipeHandler.SWIPE_LEFT,
 ], function (direction) {
     plusSlides(1)
-    console.log("swipe: ", direction);
+    //console.log("swipe: ", direction);
 });
 jquerySwipeHandler.handleSwipe("#slider-img-list", [
     jquerySwipeHandler.SWIPE_RIGHT,
 ], function (direction) {
     plusSlides(-1)
-    console.log("swipe: ", direction);
+    //console.log("swipe: ", direction);
 });
