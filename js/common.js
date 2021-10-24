@@ -14,14 +14,14 @@ var readCategoryURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + categor
 /*Read products*/
 var productSheetName = "Products";
 var productFromRange = "A1";
-var productToRange = "F1001";
+var productToRange = "F500";
 var readProductURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + productSheetName + "!" + productFromRange + ":" + productToRange + "?key=" + apiKey;
 /*Read products ends*/
 
 /*Read products*/
 var productVariantsSheetName = "ProductVariants";
 var productVariantsFromRange = "A1";
-var productVariantsToRange = "F100";
+var productVariantsToRange = "F2001";
 var readProductVariantsURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + productVariantsSheetName + "!" + productVariantsFromRange + ":" + productVariantsToRange + "?key=" + apiKey;
 /*Read products ends*/
 

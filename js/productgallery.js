@@ -1,6 +1,6 @@
 var variantCollection = [];
 var slideIndex = 1;
-var productImageBasePath = "https://ifc2021.github.io";
+var productImageBasePath = window.location.protocol + "//" + window.location.hostname;
 
 $(document).ready(function () {
 
@@ -100,5 +100,3 @@ jquerySwipeHandler.handleSwipe("#slider-img-list", [
     plusSlides(-1)
     console.log("swipe: ", direction);
 });
-
-
