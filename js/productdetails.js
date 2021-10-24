@@ -55,7 +55,7 @@ function ChkAllImages(prodID){
 
     }
     if (kounter1 > 1){
-        console.log(productImageBasePath + '/ProductImages/' + product[0][3] + '/' + 'got more images!!!');
+        console.log( product[0][3] + ': got more images!!!');
     }
 
 }
