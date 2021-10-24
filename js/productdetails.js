@@ -60,6 +60,15 @@ function ChkAllImages(prodID){
 
 }
 //----------------------------------------------------------------------------------------------------
+function urlExists(testUrl) {
+    var http = jQuery.ajax({
+        type: "HEAD",
+        url: testUrl,
+        async: false
+    })
+    return http.status;
+}
+//----------------------------------------------------------------------------------------------------
 /* function to load product details and add to cart grid */
 function loadProductDetails() {
 
