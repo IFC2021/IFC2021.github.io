@@ -166,6 +166,9 @@ function navigateToProducts(Category) {
     window.location.href = "products.html";
 }
 
+function getMonthFromString(mon){
+    return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1;
+ }
 // A $( document ).ready() block.
 $(document).ready(function () {
     console.log("document ready main EVENT -> fetching online carouself text");
@@ -191,9 +194,10 @@ $(document).ready(function () {
         var d1 = dateFrom.split("-");
         var d2 = dateTo.split("-");
         var c = dateCheck.split("-");
-
-        var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
-        var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+        var monthINT1 = getMonthFromString(d1[1]);
+        var monthINT2 = getMonthFromString(d2[1]);
+        var from = new Date(d1[2], parseInt(monthINT1) - 1, d1[0]);  // -1 because months are from 0 to 11
+        var to = new Date(d2[2], parseInt(monthINT2) - 1, d2[0]);
         var check = new Date(c[2], parseInt(c[1]) - 1, c[0]);
          
         if (check >= from && check <= to) {
