@@ -201,6 +201,7 @@ $(document).ready(function () {
         var check = new Date(c[2], parseInt(c[1]) - 1, c[0]);
          
         if (check >= from && check <= to) {
+            console.log("got match - show msg " + obj[0]);
             headerTextCarouselBlock += '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + obj[0] + ' </h5> </div>  </div>';
         }
     });
