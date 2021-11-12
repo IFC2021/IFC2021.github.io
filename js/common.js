@@ -206,7 +206,7 @@ $(document).ready(function () {
         }
     });
     console.log(headerTextCarouselBlock);
-    $('#headerTextCarousel').html(headerTextCarouselBlock);
+    //$('#headerTextCarousel').html(headerTextCarouselBlock);
 });
 
  
