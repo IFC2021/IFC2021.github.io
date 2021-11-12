@@ -25,10 +25,19 @@ var productVariantsToRange = "F2001";
 var readProductVariantsURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + productVariantsSheetName + "!" + productVariantsFromRange + ":" + productVariantsToRange + "?key=" + apiKey;
 /*Read products ends*/
 
+/*Read Header Text Carousel*/
+
+var headerTextCarouselSheetName = "HeaderTextCarousel";
+var headerTextCarouselFromRange = "A1";
+var headerTextCarouselToRange = "C20";
+var readHeaderTextCarouselURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + headerTextCarouselSheetName + "!" + headerTextCarouselFromRange + ":" + headerTextCarouselToRange + "?key=" + apiKey;
+
+/*Read Header Text Carousel ends*/
+
 var categoryResult = null;
 var productResult = null;
 var productVariantsResult = null;
-
+var headerTextCarouselResult = null;
 
 /*Function to fetch product categories*/
 function getCategoriesAjax() {
@@ -79,6 +88,20 @@ function getProductVariantsAjax() {
     });
 }
 
+/*Function to fetch product details*/
+function getHeaderTextCarouselAjax() {
+    $.ajax({
+        type: "GET",
+        url: readHeaderTextCarouselURL,
+        cache: false,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            headerTextCarouselResult = data.values.slice(1); //removed first row. it contains column title
+            sessionStorage.setItem("headerTextCarouselResult", JSON.stringify(headerTextCarouselResult));
+        }
+    });
+}
 /*Load categories for main menu*/
 function loadMenuCategories(categories) {
 
@@ -141,5 +164,42 @@ function navigateToProducts(Category) {
     sessionStorage.setItem("selectedCategory", Category);
     window.location.href = "products.html";
 }
+
+// A $( document ).ready() block.
+$(document).ready(function () {
+    if (headerTextCarouselResult == null) {
+        getHeaderTextCarouselAjax();
+    }
+    headerTextCarouselResult = JSON.parse(sessionStorage.getItem("headerTextCarouselResult"))
+
+    var headerTextCarouselBlock = '';
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + '-' + mm + '-' + yyyy;
+
+    $(headerTextCarouselResult).each(function (index, obj) {
+
+        var dateFrom = obj[1];
+        var dateTo = obj[2];
+        var dateCheck = today;
+
+        var d1 = dateFrom.split("-");
+        var d2 = dateTo.split("-");
+        var c = dateCheck.split("-");
+
+        var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
+        var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+        var check = new Date(c[2], parseInt(c[1]) - 1, c[0]);
+         
+        if (check >= from && check <= to) {
+            headerTextCarouselBlock += '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + obj[0] + ' </h5> </div>  </div>';
+        }
+    });
+
+    $('#headerTextCarousel').html(headerTextCarouselBlock);
+});
 
  
