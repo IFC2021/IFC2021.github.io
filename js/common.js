@@ -168,6 +168,7 @@ function navigateToProducts(Category) {
 
 // A $( document ).ready() block.
 $(document).ready(function () {
+    console.log("document ready main EVENT -> fetching online carouself text");
     if (headerTextCarouselResult == null) {
         getHeaderTextCarouselAjax();
     }
