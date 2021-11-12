@@ -205,7 +205,7 @@ $(document).ready(function () {
             headerTextCarouselBlock += '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + obj[0] + ' </h5> </div>  </div>';
         }
     });
-
+    console.log(headerTextCarouselBlock);
     $('#headerTextCarousel').html(headerTextCarouselBlock);
 });
 
