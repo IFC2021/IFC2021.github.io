@@ -90,6 +90,7 @@ function getProductVariantsAjax() {
 
 /*Function to fetch product details*/
 function getHeaderTextCarouselAjax() {
+    console.log("fetching online carouself text");
     $.ajax({
         type: "GET",
         url: readHeaderTextCarouselURL,
