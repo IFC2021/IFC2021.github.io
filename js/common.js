@@ -173,9 +173,9 @@ function getMonthFromString(mon){
 $(document).ready(function () {
     console.log("document ready main EVENT -> fetching online carousel text");
     if (headerTextCarouselResult == null) {
-        getHeaderTextCarouselAjax();
+        //getHeaderTextCarouselAjax();
     }
-    headerTextCarouselResult = JSON.parse(sessionStorage.getItem("headerTextCarouselResult"))
+    //headerTextCarouselResult = JSON.parse(sessionStorage.getItem("headerTextCarouselResult"))
 
     var headerTextCarouselBlock = '';
 
@@ -184,7 +184,7 @@ $(document).ready(function () {
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     today = dd + '-' + mm + '-' + yyyy;
-
+	/*
     $(headerTextCarouselResult).each(function (index, obj) {
 
         var dateFrom = obj[1];
@@ -206,7 +206,10 @@ $(document).ready(function () {
         }
     });
     console.log(headerTextCarouselBlock);
-    //$('#headerTextCarousel').html(headerTextCarouselBlock);
+	*/
+	headerTextCarouselBlock = '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + 'My static Js msg' + ' </h5> </div>  </div>';
+	headerTextCarouselBlock += '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + 'Second static Js msg' + ' </h5> </div>  </div>';
+    $('#headerTextCarousel').html(headerTextCarouselBlock);
 });
 
  
