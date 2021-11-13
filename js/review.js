@@ -190,9 +190,7 @@ function submitOrder() {
     var cartString = getOrderString();
     //console.log("See " + cartString);
 	showAndroidToast('Order => ' + cartString);															
-    /* moves current order to previous cart */
-									  
-									   
+    /* moves current order to previous cart */					   
 											   
     localStorage.setItem("previousCart", JSON.stringify(Order));
 
