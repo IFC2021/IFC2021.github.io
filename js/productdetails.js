@@ -57,7 +57,7 @@ function ChkAllImages(prodID){
     if (kounter1 > 1){
         console.log( product[0][3] + ': got more images -> ' + kounter1);
         $("#galleryNavigationbutton").show();
-        $("#galleryNavigationLink").text("More " + kounter1 + " images ...");
+        $("#galleryNavigationLink").text("More " + (kounter1 - 1) + " images ...");
     }
     else{
         $("#galleryNavigationbutton").hide();
