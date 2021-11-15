@@ -277,15 +277,15 @@ function getOrderString(){
         if (prevProduct===cartObj[i].ProductID){
             // same product
             sResponse=sResponse.replace(productComment,"");
-            sResponse +=  attrString
+            sResponse += attrString +";";
             sResponse += productComment;
         }
         else{
             if (sResponse.trim().length>0){
-                sResponse +="; ";
+                sResponse +=";; ";
             }
-            sResponse += prodName + ":: " + attrString;
-            sResponse += productComment;
+            sResponse += prodName + ":; " + attrString + ";";
+            sResponse += productComment + ";";
         }
         prevProduct=cartObj[i].ProductID; // save current product for comparision next time
         
