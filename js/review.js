@@ -247,6 +247,8 @@ function getOrderString(){
     cartObj = JSON.parse(localStorage.getItem("cart"));
    }
    if (cartObj.length > 0) {
+    var prevProduct="";
+    var productComment="";   
     for (var i = 0; i < cartObj.length; i++) {
         //Loop thru cart object for each product and prepares the row for each products
 
@@ -258,22 +260,56 @@ function getOrderString(){
             return [[key, value]];
         });
         var sQTY = cartObj[i].Quantity;
+        
+
         var attrVal="";
         for (var j = 0; j < variantList.length; j++) {
             var currentVariant = productVariantsResult.filter(function (obj) {
                 return (obj[2] == variantList[j][1] && obj[0] == cartObj[i].ProductID);
             });  
-            attrVal += variantList[j][0] + ": " + currentVariant[0][4] + ", ";
+            attrVal += variantList[j][0].toUpperCase() + "= " + currentVariant[0][4] + ", ";
         }
+        var attrString = "[" + attrVal + "QTY#=" + sQTY +  "]";
+        if (cartObj[i].ProductComment.trim().length>0)
+            {productComment="Prd-notes: " +cartObj[i].ProductComment }
+            else{productComment=""};
+
+        if (prevProduct===cartObj[i].ProductID){
+            // same product
+            sResponse=sResponse.replace(productComment,"");
+            sResponse +=  attrString
+            sResponse += productComment;
+        }
+        else{
+            if (sResponse.trim().length>0){
+                sResponse +="; ";
+            }
+            sResponse += prodName + ":: " + attrString;
+            sResponse += productComment;
+        }
+        prevProduct=cartObj[i].ProductID; // save current product for comparision next time
         
-        sResponse += prodName + ": [QTY: " + sQTY + ", " + attrVal  + "];";
+        
 
     }
-    return sResponse;
+    sResponse += ";";
+
+    sResponse += getOrderComments();
+    return  sResponse;
    }
 
 }
-																
+    
+function getOrderComments(){
+    var oComments="";
+    try{
+        if ($("#txtOrderComments").val().trim().length>0)
+        oComments= "|Order Comments:" + $("#txtOrderComments").val() + "|";
+    }
+    catch(e)
+    {}
+    return oComments;
+}
 
 function showAndroidToast(toast) {
     if(typeof Android !== "undefined" && Android !== null) {
