@@ -277,12 +277,12 @@ function getOrderString(){
         if (prevProduct===cartObj[i].ProductID){
             // same product
             sResponse=sResponse.replace(productComment,"");
-            sResponse += prodName + ": " + attrString + ";";
+            sResponse += prodName + ": " + attrString + ";;";
             sResponse += productComment;
         }
         else{
             if (sResponse.trim().length>0){
-                sResponse +="*********************; ";
+                sResponse +=";*********************; ";
             }
             sResponse += prodName + ": " + attrString + ";";
             sResponse += productComment + ";";
