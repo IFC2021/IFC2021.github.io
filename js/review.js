@@ -292,7 +292,7 @@ function getOrderString(){
         
 
     }
-    sResponse += ";";
+    sResponse += ";*********************;";
 
     sResponse += getOrderComments();
     return  sResponse;
