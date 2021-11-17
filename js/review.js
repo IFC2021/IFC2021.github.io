@@ -1,5 +1,5 @@
 
-
+//------------------------------------------------------------------------
 $(document).ready(function () {
 
     /* fetches categories, products and product details from local storage,
@@ -37,6 +37,7 @@ $(document).ready(function () {
     }
     updateCartCount();
 });
+//------------------------------------------------------------------------
 /*function to load review cart */
 function loadReviewCart() {
     var cartObj = [];
@@ -145,7 +146,7 @@ function loadReviewCart() {
     }
 
 }
-
+//------------------------------------------------------------------------
 /*Section - clear cart*/
 function confirmClearCart(cartType) {
     $('#hdnCartTypeToDelete').val(cartType);
@@ -176,7 +177,7 @@ function clearCart() {
 }
 /*Section - Clear cart*/
 
-
+//------------------------------------------------------------------------
 /* submit order.*/
 function submitOrder() {
     var Order = [];
@@ -208,17 +209,19 @@ function submitOrder() {
     }, 1000);
 }
 
-
+//------------------------------------------------------------------------
 function editCart(ProductID) {
     /*set product id to storage and redirects to product details. value of cartProductToEdit is used in product detail page to decide of call is from edit cart*/
     sessionStorage.setItem('cartProductToEdit', ProductID);
     window.location.href = "productdetails.html"
 }
+//------------------------------------------------------------------------
 /*Section - Delete item from cart*/
 $(document).on('click', '.btn-xs-delete', function () {
     $('#hdnValueToDelete').val($(this).attr('data-rowindex'))
     $('#confirmDelete').modal('show');
 });
+//------------------------------------------------------------------------
 function deleteCartRow() {
     var cartRowIndex = $('#hdnValueToDelete').val();
     var cartObj = JSON.parse(localStorage.getItem("cart"));
@@ -231,7 +234,7 @@ function deleteCartRow() {
     $('#confirmDelete').modal('hide');
 }
 /*Section ends - Delete item from cart*/
-
+//------------------------------------------------------------------------
 /*Show previous cart or current cart*/
 function switchCart(showPreviousCart) {
     if (showPreviousCart) {
@@ -239,7 +242,7 @@ function switchCart(showPreviousCart) {
     }
     window.location.href = "review.html";
 }
-
+//------------------------------------------------------------------------
 function getOrderString(){
    var cartObj = [];
    var sResponse="";
@@ -299,18 +302,18 @@ function getOrderString(){
    }
 
 }
-    
+//------------------------------------------------------------------------    
 function getOrderComments(){
     var oComments="";
     try{
         if ($("#txtOrderComments").val().trim().length>0)
-        oComments= "|Order Comments:" + $("#txtOrderComments").val() + "|";
+        oComments= "Order Comments:" + $("#txtOrderComments").val() ;
     }
     catch(e)
     {}
     return oComments;
 }
-
+//------------------------------------------------------------------------
 function showAndroidToast(toast) {
     if(typeof Android !== "undefined" && Android !== null) {
         Android.TestDirectWA2(toast);
@@ -318,3 +321,4 @@ function showAndroidToast(toast) {
         alert("Not viewing in webview " + toast);
     }
 }
+//------------------------------------------------------------------------
