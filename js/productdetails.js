@@ -503,7 +503,8 @@ function responsiveTable() {
 }
 function initalizeSelect2() {
     $('.custom-ddl-color').select2({
-        templateResult: formatOptions
+        templateResult: formatOptions,
+        dropdownCssClass : 'no-search'
     });
     $('.custom-ddl').select2();
 }
