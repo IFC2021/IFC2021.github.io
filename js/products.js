@@ -526,12 +526,17 @@ function responsiveTable() {
     // document ready  
 
 }
+//--------------------------------------------------------------------------
 function initalizeSelect2() {
     $('.custom-ddl-color').select2({
-        templateResult: formatOptions
+        templateResult: formatOptions,
+        dropdownCssClass : 'no-search'
     });
-    $('.custom-ddl').select2();
+    $('.custom-ddl').select2({
+        dropdownCssClass : 'no-search'
+    });
 }
+//--------------------------------------------------------------------------
 /* select2 dropdown: to show customized options with color boxes in "color" dropdown */
 function formatOptions(option) {
     if (!option.id) {
@@ -552,7 +557,7 @@ function formatOptions(option) {
 
     return $option;
 };
-
+//--------------------------------------------------------------------------
 /*on color selection, this is to show selected color box after the dropdown in grid*/
 $(document).on('select2:select', '.custom-ddl-color', function (e) {
     $(this).parent().find('#selectedColorSample').remove();
@@ -561,7 +566,7 @@ $(document).on('select2:select', '.custom-ddl-color', function (e) {
     }
 
 });
-
+//--------------------------------------------------------------------------
 $(document).on('blur', '.qty-number', function () {
     if ($(this).val() != '') {
         var productID = $('#hdnProductID').val();

@@ -204,7 +204,7 @@ function loadProductDetails() {
         sessionStorage.setItem("cartProductToEdit", '');
     }
 }
-
+//--------------------------------------------------------------------------
 function addRow() {
 
     var rowIndex = $('#tblVariantsBody tr').length;
@@ -276,7 +276,7 @@ $(document).on('click', '.removeRow', function () {
     $('#hdnValueToDelete').val($(this).attr('data-rowindex'));
     $('#confirmDelete').modal('show');
 });
-
+//--------------------------------------------------------------------------
 function removeRow() {
     var valueToDelete = $('#hdnValueToDelete').val();
     var current = $("#tblVariantsBody tr").find('[data-rowindex=' + valueToDelete + ']');
@@ -303,7 +303,7 @@ function removeRow() {
             }
         }]
  */
-
+//--------------------------------------------------------------------------
 function addToCart(finalize) {
 
     var isValid = true;
@@ -425,7 +425,7 @@ function addToCart(finalize) {
     updateCartCount();
 }
 
-
+//--------------------------------------------------------------------------
 function responsiveTable() {
 
     // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
@@ -501,13 +501,17 @@ function responsiveTable() {
     // document ready  
 
 }
+//--------------------------------------------------------------------------
 function initalizeSelect2() {
     $('.custom-ddl-color').select2({
         templateResult: formatOptions,
         dropdownCssClass : 'no-search'
     });
-    $('.custom-ddl').select2();
+    $('.custom-ddl').select2({
+        dropdownCssClass : 'no-search'
+    });
 }
+//--------------------------------------------------------------------------
 /* select2 dropdown: to show customized options with color boxes in "color" dropdown */
 function formatOptions(option) {
     if (!option.id) {
@@ -533,7 +537,7 @@ function navigateToProductGallery() {
     sessionStorage.setItem("productGalleryProductID", $('#hdnProductID').val());
     window.location.href = "productgallery.html";
 }
-
+//--------------------------------------------------------------------------
 /*on color selection, this is to show selected color box after the dropdown in grid*/
 $(document).on('select2:select', '.custom-ddl-color', function (e) {
     $(this).parent().find('#selectedColorSample').remove();
@@ -541,7 +545,7 @@ $(document).on('select2:select', '.custom-ddl-color', function (e) {
         $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block; border:solid 1px black; background-color:' + $(this).val() + '; height:15px; width:15px; margin-left:10px"></span>')
     }													 
 });
-
+//--------------------------------------------------------------------------
 $(document).on('blur', '.qty-number', function () {
     if ($(this).val() != '') {
         var productID = $('#hdnProductID').val();
@@ -558,3 +562,4 @@ $(document).on('blur', '.qty-number', function () {
     }
 
 });
+//--------------------------------------------------------------------------
