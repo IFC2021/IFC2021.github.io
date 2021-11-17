@@ -270,7 +270,8 @@ function getOrderString(){
             var currentVariant = productVariantsResult.filter(function (obj) {
                 return (obj[2] == variantList[j][1] && obj[0] == cartObj[i].ProductID);
             });  
-            attrVal += variantList[j][0].toUpperCase() + "= " + currentVariant[0][4] + ", ";
+            //attrVal += variantList[j][0].toUpperCase() + "= " + currentVariant[0][4] + ", ";
+            attrVal += currentVariant[0][4] + ", ";
         }
         var attrString = "[" + attrVal + "QTY#=" + sQTY +  "]";
         if (cartObj[i].ProductComment.trim().length>0)
@@ -285,7 +286,7 @@ function getOrderString(){
         }
         else{
             if (sResponse.trim().length>0){
-                sResponse +=";*********************; ";
+                sResponse +=";*********************;";
             }
             sResponse += prodName + ": " + attrString + ";";
             sResponse += productComment + ";";
