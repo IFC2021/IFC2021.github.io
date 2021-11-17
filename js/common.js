@@ -90,7 +90,7 @@ function getProductVariantsAjax() {
 
 /*Function to fetch product details*/
 function getHeaderTextCarouselAjax() {
-    console.log("fetching online carousel text");
+    //console.log("fetching online carousel text");
     $.ajax({
         type: "GET",
         url: readHeaderTextCarouselURL,
@@ -171,7 +171,7 @@ function getMonthFromString(mon){
  }
 // A $( document ).ready() block.
 $(document).ready(function () {
-    console.log("document ready main EVENT -> fetching online carousel text");
+    //console.log("document ready main EVENT -> fetching online carousel text");
     if (headerTextCarouselResult == null) {
         getHeaderTextCarouselAjax();
     }
