@@ -264,14 +264,13 @@ function getOrderString(){
         });
         var sQTY = cartObj[i].Quantity;
         
-
         var attrVal="";
         for (var j = 0; j < variantList.length; j++) {
             var currentVariant = productVariantsResult.filter(function (obj) {
                 return (obj[2] == variantList[j][1] && obj[0] == cartObj[i].ProductID);
             });  
-            //attrVal += variantList[j][0].toUpperCase() + "= " + currentVariant[0][4] + ", ";
-            attrVal += currentVariant[0][4] + ", ";
+            //attrVal += variantList[j][0].toUpperCase() + "= " + currentVariant[0][4] + ", "; // Attribute name and value
+            attrVal += currentVariant[0][4] + ", ";// only Attribute value
         }
         var attrString = "[" + attrVal + "QTY#=" + sQTY +  "]";
         if (cartObj[i].ProductComment.trim().length>0)
@@ -293,8 +292,6 @@ function getOrderString(){
         }
         prevProduct=cartObj[i].ProductID; // save current product for comparision next time
         
-        
-
     }
     sResponse += ";*********************;";
 
