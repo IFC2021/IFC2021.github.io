@@ -251,7 +251,8 @@ function getOrderString(){
    }
    if (cartObj.length > 0) {
     var prevProduct="";
-    var productComment="";   
+    var productComment="";
+    var seperatorLine= ";*********************;";
     for (var i = 0; i < cartObj.length; i++) {
         //Loop thru cart object for each product and prepares the row for each products
 
@@ -274,7 +275,7 @@ function getOrderString(){
         }
         var attrString = "[" + attrVal + "QTY#=" + sQTY +  "]";
         if (cartObj[i].ProductComment.trim().length>0)
-            {productComment="Prd-notes: " +cartObj[i].ProductComment }
+            {productComment="Prd-notes: _" +cartObj[i].ProductComment +"_"}
             else{productComment=""};
 
         if (prevProduct===cartObj[i].ProductID){
@@ -285,7 +286,7 @@ function getOrderString(){
         }
         else{
             if (sResponse.trim().length>0){
-                sResponse +=";*********************;";
+                sResponse += seperatorLine;
             }
             sResponse += prodName + ": " + attrString + ";";
             sResponse += productComment + ";";
@@ -293,7 +294,7 @@ function getOrderString(){
         prevProduct=cartObj[i].ProductID; // save current product for comparision next time
         
     }
-    sResponse += ";*********************;";
+    sResponse += seperatorLine;
 
     sResponse += getOrderComments();
     return  sResponse;
@@ -305,7 +306,7 @@ function getOrderComments(){
     var oComments="";
     try{
         if ($("#txtOrderComments").val().trim().length>0)
-        oComments= "Order Comments:" + $("#txtOrderComments").val() ;
+        oComments= "Order notes: _" + $("#txtOrderComments").val() + "_" ;
     }
     catch(e)
     {}
