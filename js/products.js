@@ -51,13 +51,14 @@ $(document).ready(function () {
     });
     updateCartCount();
 });
-
+//------------------------------------------------------------------------------------------------
 function refreshData() {
     getCategoriesAjax();
     getProductsAjax();
     getProductVariantsAjax();
     window.location.href = "products.html";
 }
+//------------------------------------------------------------------------------------------------
 function loadProductsSideBarCategories(categories) {
     var sidebarCat = '<li><a href="javascript:" onclick="navigateToProducts(\'All\')" >All Categories</a></li>';
     for (var i = 0; i < categories.length; i++) {
@@ -65,6 +66,7 @@ function loadProductsSideBarCategories(categories) {
     }
     $('#sidebarCat').html(sidebarCat);
 }
+//------------------------------------------------------------------------------------------------
 function loadProducts(products) {
 
     var selectedCategory = null;
@@ -99,7 +101,7 @@ function navigateToProductDetails(productID) {
     sessionStorage.setItem("selectedProductID", productID);
     window.location.href = "productdetails.html";
 }
-
+//------------------------------------------------------------------------------------------------
 /* function to load product details and add to cart grid */
 function loadProductDetails() {
 
@@ -231,7 +233,7 @@ function loadProductDetails() {
         sessionStorage.setItem("cartProductToEdit", '');
     }
 }
-
+//------------------------------------------------------------------------------------------------
 function addRow() {
 
     var rowIndex = $('#tblVariantsBody tr').length;
@@ -303,7 +305,7 @@ $(document).on('click', '.removeRow', function () {
     $('#hdnValueToDelete').val($(this).attr('data-rowindex'));
     $('#confirmDelete').modal('show');
 });
-
+//------------------------------------------------------------------------------------------------
 function removeRow() {
     var valueToDelete = $('#hdnValueToDelete').val();
     var current = $("#tblVariantsBody tr").find('[data-rowindex=' + valueToDelete + ']');
@@ -313,6 +315,7 @@ function removeRow() {
     }
     $('#confirmDelete').modal('hide');
 }
+//------------------------------------------------------------------------------------------------
 /*delete row section ends*/
 
 /*Creates the Cart*/
@@ -330,7 +333,7 @@ function removeRow() {
             }
         }]
  */
-
+//------------------------------------------------------------------------------------------------
 function addToCart(finalize) {
 
     var isValid = true;
@@ -457,29 +460,20 @@ function addToCart(finalize) {
     updateCartCount();
 }
 
-
+//------------------------------------------------------------------------------------------------
 function responsiveTable() {
 
+    // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
     $('.table-responsive-stack').each(function (i) {
         var id = $(this).attr('id');
         //alert(id);
-        var totalHeaders = $(this).find("th").length;
         $(this).find("th").each(function (i) {
             $('#' + id + ' td:nth-child(' + (i + 1) + ')').find('.table-responsive-stack-thead').remove();
-            $('#' + id + ' td:nth-child(' + (i + 1) + ')').addClass((totalHeaders == (i + 1)) && i % 2 == 0 ? 'last-odd' : '');
-            //$('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span style="min-width: 35%; display:inline-block" class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
-            // $('.table-responsive-stack-thead').hide();
             if ($(this).text() != "Delete") {
-                if ($(this).text() == "Color") {
-                    $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 30%; display:inline-block">' + $(this).text() + ':</span> ');
-                }
-                else {
-                    $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 40%; display:inline-block">' + $(this).text() + ':</span> ');
-                }
-
+                $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 22%; display:inline-block">' + $(this).text() + ':</span> ');
             }
+            $('.table-responsive-stack-thead').hide();
         });
-
     });
 
     $('.table-responsive-stack').each(function () {
@@ -488,7 +482,7 @@ function responsiveTable() {
         //console.log(rowGrow);
         $(this).find("th, td").css('flex-basis', rowGrow);
     });
-
+    
     function flexTable() {
         if ($(window).width() < 768) {
 
@@ -562,7 +556,7 @@ function formatOptions(option) {
 $(document).on('select2:select', '.custom-ddl-color', function (e) {
     $(this).parent().find('#selectedColorSample').remove();
     if ($(this).val().toLowerCase().indexOf('x') == -1) {
-        $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block; border:solid 1px black; background-color:' + $(this).val() + '; height:15px; width:15px; margin-left:10px"></span>')
+        $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block; border:solid 1px black; background-color:' + $(this).val() + '; height:25px; width:25px; vertical-align: middle; margin-left:10px"></span>')
     }
 
 });
