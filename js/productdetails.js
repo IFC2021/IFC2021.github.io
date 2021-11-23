@@ -430,7 +430,6 @@ function addToCart(finalize) {
 //--------------------------------------------------------------------------
 function responsiveTable() {
 
-    // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
     $('.table-responsive-stack').each(function (i) {
         var id = $(this).attr('id');
         
