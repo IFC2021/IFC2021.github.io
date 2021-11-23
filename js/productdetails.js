@@ -143,10 +143,12 @@ function loadProductDetails() {
         });
 
         if (variantCollection.length > 0) {
-            variantTableHeaderBlock += '<th class="" style="width:115px">Quantity</th><th class="text-center">Delete</th></tr>';
+            //variantTableHeaderBlock += '<th class="" style="width:115px">Quantity</th><th class="text-center">Delete</th></tr>';
+			variantTableHeaderBlock += '<th class="" >Quantity</th><th class="text-center">Delete</th></tr>';
         }
         else {
-            variantTableHeaderBlock += '<th class="" style="width:115px">Quantity</th></tr>';
+            //variantTableHeaderBlock += '<th class="" style="width:115px">Quantity</th></tr>';
+			variantTableHeaderBlock += '<th class="" >Quantity</th></tr>';
             $('#btnAddRow').addClass('hide');
         }
 
@@ -431,30 +433,14 @@ function responsiveTable() {
     // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
     $('.table-responsive-stack').each(function (i) {
         var id = $(this).attr('id');
-        //alert(id);
-        var totalHeaders = $(this).find("th").length;
+        
         $(this).find("th").each(function (i) {
             $('#' + id + ' td:nth-child(' + (i + 1) + ')').find('.table-responsive-stack-thead').remove();
-            $('#' + id + ' td:nth-child(' + (i + 1) + ')').addClass((totalHeaders == (i + 1)) && i % 2 == 0 ? 'last-odd' : '');
-            //$('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span style="min-width: 35%; display:inline-block" class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
-            // $('.table-responsive-stack-thead').hide();
             if ($(this).text() != "Delete") {
-                if ($(this).text() == "Color") {
-                    $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 30%; display:inline-block">' + $(this).text() + ':</span> ');
-                }
-                else {
-                    $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 40%; display:inline-block">' + $(this).text() + ':</span> ');
-                }
-
+                $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 38%; display:inline-block">' + $(this).text() + ':</span> ');
             }
+            $('.table-responsive-stack-thead').hide();
         });
-
-        //$(this).find("th").each(function (i) {
-        //    $('#' + id + ' td:nth-child(' + (i + 1) + ')').find('.table-responsive-stack-thead').remove();
-        //    if ($(this).text() != "Delete") {
-        //        $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 40%; display:inline-block">' + $(this).text() + ':</span> ');
-        //    }
-        //});
     });
 
     $('.table-responsive-stack').each(function () {
@@ -542,7 +528,7 @@ function navigateToProductGallery() {
 $(document).on('select2:select', '.custom-ddl-color', function (e) {
     $(this).parent().find('#selectedColorSample').remove();
 	if ($(this).val().toLowerCase().indexOf('x') == -1) {
-        $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block; border:solid 1px black; background-color:' + $(this).val() + '; height:15px; width:15px; margin-left:10px"></span>')
+        $(this).parent().find('.select2-container').after('<span id="selectedColorSample" style="display:inline-block; border:solid 1px black; background-color:' + $(this).val() + '; height:25px; width:25px;vertical-align: middle; margin-left:10px"></span>')
     }													 
 });
 //--------------------------------------------------------------------------
