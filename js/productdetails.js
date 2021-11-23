@@ -271,6 +271,7 @@ function addRow() {
     //initializes select2 dropdowns and responsive table since new HTML is added in DOM
     initalizeSelect2();
     responsiveTable();
+    document.getElementById('tblVariantsBody').lastElementChild.scrollIntoView();
 }
 /*section to delete row from grid, It will identity the row to delete with "data-rowindex"
  and will show confirm popup and will remove that in removeRow() <tr> */
