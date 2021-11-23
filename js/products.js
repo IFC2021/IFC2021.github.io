@@ -218,6 +218,7 @@ function loadProductDetails() {
 
                 initalizeSelect2(); //after creating rows, initialize select2 customized dropdown
                 responsiveTable(); // intialize responsive table
+                document.getElementById('tblVariantsBody').lastElementChild.scrollIntoView({behavior: "smooth"});// auto-scroll to newly added row
                 //triggers select event of select2 dropdown, that will show selected color box after dropdown.
                 $('.custom-ddl-color').trigger({
                     type: 'select2:select'
