@@ -199,7 +199,7 @@ function loadProductDetails() {
             /* loop to create table rows with existing cart items */
 
             for (var i = 0; i < existingCart.length; i++) {
-                addRow(); //creates a blank row
+                addRow(false); //creates a blank row
 
                 var existingCartItem = existingCart[i];
 
@@ -229,13 +229,13 @@ function loadProductDetails() {
             /*section if product dosen't exist in cart or call is not from edit button. i.e. fresh  call from product page.
              adds blank row in product variant grid
              */
-            addRow();
+            addRow(false);
         }
         sessionStorage.setItem("cartProductToEdit", '');
     }
 }
 //------------------------------------------------------------------------------------------------
-function addRow() {
+function addRow(viaAddbutton) {
 
     var rowIndex = $('#tblVariantsBody tr').length;
     var productID = $('#hdnProductID').val();
@@ -299,6 +299,7 @@ function addRow() {
     //initializes select2 dropdowns and responsive table since new HTML is added in DOM
     initalizeSelect2();
     responsiveTable();
+    if (viaAddbutton)
     document.getElementById('tblVariantsBody').lastElementChild.scrollIntoView({behavior: "smooth"});// auto-scroll to newly added row
 }
 /*section to delete row from grid, It will identity the row to delete with "data-rowindex"

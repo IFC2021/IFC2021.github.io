@@ -201,7 +201,7 @@ function loadProductDetails() {
             /*section if product dosen't exist in cart or call is not from edit button. i.e. fresh  call from product page.
              adds blank row in product variant grid
              */
-            addRow(true);
+            addRow(false);
         }
         sessionStorage.setItem("cartProductToEdit", '');
     }
@@ -271,6 +271,7 @@ function addRow(viaAddbutton) {
     //initializes select2 dropdowns and responsive table since new HTML is added in DOM
     initalizeSelect2();
     responsiveTable();
+    console.log("via Add: " + viaAddbutton);
     if (viaAddbutton)
     document.getElementById('tblVariantsBody').lastElementChild.scrollIntoView({behavior: "smooth"});// auto-scroll to newly added row
 }
