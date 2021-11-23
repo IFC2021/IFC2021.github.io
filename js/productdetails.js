@@ -437,7 +437,7 @@ function responsiveTable() {
         $(this).find("th").each(function (i) {
             $('#' + id + ' td:nth-child(' + (i + 1) + ')').find('.table-responsive-stack-thead').remove();
             if ($(this).text() != "Delete") {
-                $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 38%; display:inline-block">' + $(this).text() + ':</span> ');
+                $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead" style="width: 22%; display:inline-block">' + $(this).text() + ':</span> ');
             }
             $('.table-responsive-stack-thead').hide();
         });
