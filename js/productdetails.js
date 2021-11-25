@@ -274,8 +274,9 @@ function addRow(viaAddbutton) {
     console.log("via Add: " + viaAddbutton);
     if (viaAddbutton)
     {
-      document.getElementById('tblVariantsBody').lastElementChild.scrollIntoView({behavior: "smooth"});// auto-scroll to newly added row
-      document.getElementById('tblVariantsBody').lastChild.scrollIntoView({behavior: "smooth"});
+       $("#btnAddRow").focus();
+       document.getElementById('tblVariantsBody').lastElementChild.scrollIntoView({behavior: "smooth"});// auto-scroll to newly added row
+       document.getElementById('tblVariantsBody').lastChild.scrollIntoView({behavior: "smooth"});
     }
 }
 /*section to delete row from grid, It will identity the row to delete with "data-rowindex"
