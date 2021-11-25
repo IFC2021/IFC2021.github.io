@@ -271,7 +271,7 @@ function addRow(viaAddbutton) {
     //initializes select2 dropdowns and responsive table since new HTML is added in DOM
     initalizeSelect2();
     responsiveTable();
-    console.log("via Add: " + viaAddbutton);
+    //console.log("via Add: " + viaAddbutton);
     if (viaAddbutton)
     {
        $("#btnAddRow").focus();
