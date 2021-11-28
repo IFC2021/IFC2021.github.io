@@ -306,7 +306,7 @@ function getOrderComments(){
     var oComments="";
     try{
         if ($("#txtOrderComments").val().trim().length>0)
-        oComments= "Order notes: _" + $("#txtOrderComments").val() + "_" ;
+        oComments= "Order notes: _" + $("#txtOrderComments").val().trim() + "_" ;
     }
     catch(e)
     {}
