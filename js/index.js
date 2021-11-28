@@ -31,16 +31,23 @@ $(document).ready(function () {
     }
     updateCartCount();
 });
-
+//-------------------------------------------------------------------------------------------
 /*Loads featured products */
 function loadFeaturedProducts(products) {
 
-    /* Generate random numbers from 1 to product list length and shows 8 products randomly in featured products */
+    /* retrive featured product by FeaturedProductRank column in execel sheet */
     var featuredProductBlock = '';
-    for (var i = 0; i < 8; i++) {
-        var product = products[Math.floor(Math.random() * products.length)];
-        featuredProductBlock += '<div class="product-default inner-quickview inner-icon"><figure class="img-container-height"><a onclick="navigateToProductDetails(\'' + product[1] + '\')\" href="javascript:"><img class="img-thumbnail img-aspect" src="ProductImages/' + products[i][3] + '/1.jpg"></a>  </figure> <div class="product-details"> <div class="category-wrap"> <div class="category-list"> <a href="javascript:" class="product-category">' + product[0] + '</a> </div> </div> <h3 class="product-title"> <a href="productdetails.html">' + product[2] + '</a> </h3>  </div></div>';
-    }
+    var featuredProductList = products.filter(function (obj) {
+        return (obj[6] != null)
+    });
+    // sort by value
+    featuredProductList.sort(function (a, b) {
+        return a[6] - b[6];
+    });
+
+    $(featuredProductList).each(function (index, product) {
+        featuredProductBlock += '<div class="product-default inner-quickview inner-icon"><figure class="img-container-height"><a onclick="navigateToProductDetails(\'' + product[1] + '\')\" href="javascript:"><img class="img-thumbnail img-aspect" src="ProductImages/' + product[3] + '/1.jpg"></a>  </figure> <div class="product-details"> <div class="category-wrap"> <div class="category-list"> <a href="javascript:" class="product-category">' + product[0] + '</a> </div> </div> <h3 class="product-title"> <a href="productdetails.html">' + product[2] + '</a> </h3>  </div></div>';
+    })
 
     $('#featuredProductBlock').html(featuredProductBlock);
     /* After loading featured products HTML, need to re-initialize slider since the HTML and images are created newly in DOM */
@@ -72,9 +79,10 @@ function loadFeaturedProducts(products) {
 
 }
 /* Shows quick view on click of quick button on products */
- 
+//------------------------------------------------------------------------------------------- 
 /*navigates to product details page on click of any product (featured products in this page) */
 function navigateToProductDetails(productID) {
     sessionStorage.setItem("selectedProductID", productID);
     window.location.href = "productdetails.html";
 }
+//-------------------------------------------------------------------------------------------

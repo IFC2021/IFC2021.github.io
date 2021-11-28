@@ -1,4 +1,11 @@
 
+var appVersion = 'v 1.38';
+var indexPageVersion = 'I38'
+var cataloguePageVersion = 'C38'
+var detailPageVersion = 'D38'
+var reviewPageVersion = 'R38'
+var galleryPageVersion = 'G38'
+
 var sheetAPIBaseURL = "https://sheets.googleapis.com/v4/spreadsheets"
 var ExcelfileID = "1QvHgvjouMiFIMZJoAdVPo6NHhLRQJlG_0mmn3B7Zc3E";
 var apiKey = "AIzaSyAmElMC6fNzymbUfgLF9_3r0GbIqwHjGyE";
@@ -14,7 +21,7 @@ var readCategoryURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + categor
 /*Read products*/
 var productSheetName = "Products";
 var productFromRange = "A1";
-var productToRange = "F500";
+var productToRange = "G500";
 var readProductURL = sheetAPIBaseURL + "/" + ExcelfileID + "/values/" + productSheetName + "!" + productFromRange + ":" + productToRange + "?key=" + apiKey;
 /*Read products ends*/
 
@@ -148,6 +155,7 @@ function getUserAgent() {
     txt += "<br>Resolution: " + Math.round(window.screen.width) + "x" + Math.round(window.screen.height);
     txt += "<br>Browser Online: " + navigator.onLine;
     $('#userAgent').html(txt);
+	$('#pageVersion').html('Page version: ' + indexPageVersion + '.' + cataloguePageVersion + '.' + detailPageVersion + '.' + galleryPageVersion + '.' + reviewPageVersion);																																										
 }
 /* updates the count of cart to show on cart icon at top header */
 function updateCartCount() {
@@ -211,6 +219,7 @@ $(document).ready(function () {
 	//headerTextCarouselBlock += '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + 'Second static Js msg' + ' </h5> </div>  </div>';
     $('#headerTextCarousel').html(headerTextCarouselBlock);
 	// call carousel again, if possible
+	$('.app-version').html(appVersion);
 });
 
  
