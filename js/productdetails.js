@@ -150,6 +150,7 @@ function loadProductDetails() {
             //variantTableHeaderBlock += '<th class="" style="width:115px">Quantity</th></tr>';
 			variantTableHeaderBlock += '<th class="" >Quantity</th></tr>';
             $('#btnAddRow').addClass('hide');
+            $('#btnAddAllRow').addClass('hide');
         }
 
 
@@ -205,6 +206,79 @@ function loadProductDetails() {
         }
         sessionStorage.setItem("cartProductToEdit", '');
     }
+}
+//--------------------------------------------------------------------------
+function generateUniqueCombinations(args) {
+    var r = [], max = args.length - 1;
+    function helper(arr, i) {
+        for (var j = 0, l = args[i].length; j < l; j++) {
+            var a = arr.slice(0); // clone arr
+            a.push(args[i][j]);
+            if (i == max)
+                r.push(a);
+            else
+                helper(a, i + 1);
+        }
+    }
+    helper([], 0);
+    return r;
+
+}
+//--------------------------------------------------------------------------
+function getQtyValue(){
+  var qtyDefault = 100;
+  if (document.querySelector('input.form-input.qty-number').value !=null)
+   qtyDefault = document.querySelector('input.form-input.qty-number').value;
+
+   //console.log("Qty: " + qtyDefault + " DOM: " + document.querySelector('input.form-input.qty-number').value);
+   return qtyDefault;
+}
+//--------------------------------------------------------------------------
+function addAllRow() {
+
+    document.getElementById("loaderIndicator").style.display = "block";
+    var myDefaultQty=getQtyValue();
+
+    $('#tblVariantsBody').html('');
+    var productID = $('#hdnProductID').val();
+    var productDetails = productVariantsResult.filter(function (obj) {
+        return (obj[0] === productID)
+    });
+
+    var arrayVariants = [];
+
+    variantCollection.filter(function (variant) {
+        var code = [];
+        $(productDetails).each(function (inx, objs) {
+            if (variant == objs[3]) {
+                code.push(objs[2]);
+            }
+        })
+        arrayVariants.push(code);
+        tmpCount = 0;
+    })
+    if (arrayVariants.length > 0) {
+
+        var combinations = generateUniqueCombinations(arrayVariants);
+
+        for (var i = 0; i < combinations.length; i++) {
+            addRow(false);
+            var currentComb = combinations[i];
+            var trow = $('#tblVariantsBody tr:last');
+            $(trow).find('td[data-variant="quantity"]').find('input').val(myDefaultQty);
+            $(trow).find('td').each(function (ind, obj) {
+                $(obj).find('select').val(currentComb[ind]);
+            });
+        }
+
+        initalizeSelect2(); //after creating rows, initialize select2 customized dropdown
+        responsiveTable(); // intialize responsive table
+        //triggers select event of select2 dropdown, that will show selected color box after dropdown.
+        $('.custom-ddl-color').trigger({
+            type: 'select2:select'
+        });
+    }
+    document.getElementById("loaderIndicator").style.display = "none";
 }
 //--------------------------------------------------------------------------
 function addRow(viaAddbutton) {

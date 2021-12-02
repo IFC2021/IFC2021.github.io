@@ -2,7 +2,7 @@
 var appVersion = 'v 1.38';
 var indexPageVersion = 'I38'
 var cataloguePageVersion = 'C38'
-var detailPageVersion = 'D38'
+var detailPageVersion = 'D39'
 var reviewPageVersion = 'R38'
 var galleryPageVersion = 'G38'
 

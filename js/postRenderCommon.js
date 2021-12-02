@@ -1,3 +1,18 @@
+//------------------------------------------------
+function loadNewFeatures(){
+  var showFlg= false;
+  $('#btnAddAllRow').hide();
+  showFlg= sessionStorage.getItem("ShowNewFeatures");
+  if ((showFlg !=null) && (showFlg.toLowerCase() === 'true')){
+    $('#btnAddAllRow').show();
+  };
+}
+//------------------------------------------------
+// called by Container ....
+function setFlg4NewFeatures(showFlagBoolean){
+    sessionStorage.setItem("ShowNewFeatures",showFlagBoolean);
+}
+//------------------------------------------------
 $(document).ready(function () {
     //regex to allow only alphanumeric characters
 
@@ -9,5 +24,10 @@ $(document).ready(function () {
         }
         e.target.value = str;
     });
+
+    document.getElementById("loaderIndicator").style.display = "none";
+    
+
+    loadNewFeatures();
 
 });

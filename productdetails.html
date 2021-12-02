@@ -199,6 +199,31 @@
         .no-search .select2-search {
             display:none
         }
+
+        #loaderIndicator {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
     </style>
 
 </head>
@@ -342,10 +367,14 @@
 
                                                     </div>
                                                     <div class="col-md-6 text-right">
-                                                        <button type="button" onclick="addRow(true)" id="btnAddRow" class="btn btn-info btn-sm">
+                                                        <button type="button" onclick="addRow(true);" id="btnAddRow" class="btn btn-info btn-sm">
                                                             <i class="fa fa-plus"></i> ADD
                                                         </button>
+                                                        <button type="button" onclick="addAllRow();" id="btnAddAllRow" class="btn btn-info btn-sm">
+                                                            <i class="fa fa-plus"></i> ADD ALL
+                                                        </button>
                                                     </div>
+                                                    <div id="loaderIndicator"></div>
 
                                                 </div>
                                                 <br />
