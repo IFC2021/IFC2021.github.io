@@ -45,7 +45,7 @@ var categoryResult = null;
 var productResult = null;
 var productVariantsResult = null;
 var headerTextCarouselResult = null;
-
+//--------------------------------------------------------------------------
 /*Function to fetch product categories*/
 function getCategoriesAjax() {
 
@@ -61,7 +61,7 @@ function getCategoriesAjax() {
         }
     });
 }
-
+//--------------------------------------------------------------------------
 /*Function to fetch products*/
 function getProductsAjax() {
     $.ajax({
@@ -77,7 +77,7 @@ function getProductsAjax() {
     });
 
 }
-
+//--------------------------------------------------------------------------
 /*Function to fetch product details*/
 function getProductVariantsAjax() {
     $.ajax({
@@ -94,7 +94,7 @@ function getProductVariantsAjax() {
         }
     });
 }
-
+//--------------------------------------------------------------------------
 /*Function to fetch product details*/
 function getHeaderTextCarouselAjax() {
     //console.log("fetching online carousel text");
@@ -110,6 +110,7 @@ function getHeaderTextCarouselAjax() {
         }
     });
 }
+//--------------------------------------------------------------------------
 /*Load categories for main menu*/
 function loadMenuCategories(categories) {
 
@@ -128,7 +129,7 @@ function loadMenuCategories(categories) {
     $('#catPart1').html(catPart1);
     $('#catPart2').html(catPart2);
 }
-
+//--------------------------------------------------------------------------
 /* categories show in global search dropdown*/
 function loadSearchCategories(categories) {
 
@@ -138,7 +139,7 @@ function loadSearchCategories(categories) {
     }
     $('#searchCat').html(ddlOptions);
 }
-
+//--------------------------------------------------------------------------
 /* Load categories for mobile view main menu (responsive menu) */
 function loadMobileViewMenuCat(categories) {
     var mobileViewMenuCat = '<li><a href="javascript:" onclick="navigateToProducts(\'All\')" >All Categories</a></li>';
@@ -148,7 +149,7 @@ function loadMobileViewMenuCat(categories) {
         $('#mobileViewMenuCat').html(mobileViewMenuCat);
     }
 }
-
+//--------------------------------------------------------------------------
 /* Shows user agent details at bottom right corner*/
 function getUserAgent() {
     var txt = navigator.userAgent;
@@ -157,6 +158,7 @@ function getUserAgent() {
     $('#userAgent').html(txt);
 	$('#pageVersion').html('Page version: ' + indexPageVersion + '.' + cataloguePageVersion + '.' + detailPageVersion + '.' + galleryPageVersion + '.' + reviewPageVersion);																																										
 }
+//--------------------------------------------------------------------------
 /* updates the count of cart to show on cart icon at top header */
 function updateCartCount() {
     if (localStorage.getItem("cart") != null && localStorage.getItem("cart") != "") {
@@ -167,16 +169,35 @@ function updateCartCount() {
         $('#cartItemCount').html('0');
     }
 }
-
+//--------------------------------------------------------------------------
 /* to navigate to products page on click of categories from menu  */
 function navigateToProducts(Category) {
     sessionStorage.setItem("selectedCategory", Category);
     window.location.href = "products.html";
 }
-
+//--------------------------------------------------------------------------
 function getMonthFromString(mon){
     return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1;
  }
+
+//--------------------------------------------------------------------------
+function generateUniqueCombinations(args) {
+    var r = [], max = args.length - 1;
+    function helper(arr, i) {
+        for (var j = 0, l = args[i].length; j < l; j++) {
+            var a = arr.slice(0); // clone arr
+            a.push(args[i][j]);
+            if (i == max)
+                r.push(a);
+            else
+                helper(a, i + 1);
+        }
+    }
+    helper([], 0);
+    return r;
+
+}
+//--------------------------------------------------------------------------
 // A $( document ).ready() block.
 $(document).ready(function () {
     //console.log("document ready main EVENT -> fetching online carousel text");
@@ -222,5 +243,5 @@ $(document).ready(function () {
 	// call carousel again, if possible
 	$('.app-version').html(appVersion);
 });
-
+//--------------------------------------------------------------------------
  
