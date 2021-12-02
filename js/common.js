@@ -218,6 +218,7 @@ $(document).ready(function () {
 	//headerTextCarouselBlock = '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + 'My static Js msg' + ' </h5> </div>  </div>';
 	//headerTextCarouselBlock += '<div class="top-notice bg-dark text-white"> <div class="container text-center"> <h5 class="d-inline-block mb-0 mr-2">' + 'Second static Js msg' + ' </h5> </div>  </div>';
     $('#headerTextCarousel').html(headerTextCarouselBlock);
+    document.getElementById("loaderIndicator").style.display = "none";
 	// call carousel again, if possible
 	$('.app-version').html(appVersion);
 });
