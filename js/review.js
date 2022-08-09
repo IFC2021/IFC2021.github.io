@@ -188,34 +188,36 @@ function submitWebOrder() {
     var frmEml = $('#txtOrderFromEmail').val().trim();
     if (validateEmail(frmEml)){
         console.log("valid Email: " + frmEml);
+        OrderObj.OrderComment = $('#txtOrderComments').val().trim();
+        OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
+        Order.push(OrderObj);
+
+        var cartString = getOrderString();
+        //console.log("See " + cartString);
+        //showAndroidToast('Order => ' + cartString);															
+        /* moves current order to previous cart */					   
+                                                
+        localStorage.setItem("previousCart", JSON.stringify(Order));
+
+        $("#msg-container").removeClass('hide');
+        $("#msg").html('Submitted successfully...')
+        window.setInterval(function () {
+            var timeLeft = $("#timeLeft").html();
+            if (eval(timeLeft) == 0) {
+                /*clears current cart and redirects to products page*/
+                localStorage.setItem("cart", '');
+                window.location.href = "products.html";
+            } else {
+                $("#timeLeft").html(eval(timeLeft) - eval(1));
+            }
+        }, 1000);
     }else{
         console.log("Wrong Email: " + frmEml);
         alert("Fix email address first!");
+        return;
     }
     
-    OrderObj.OrderComment = $('#txtOrderComments').val().trim();
-    OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
-    Order.push(OrderObj);
-
-    var cartString = getOrderString();
-    //console.log("See " + cartString);
-	//showAndroidToast('Order => ' + cartString);															
-    /* moves current order to previous cart */					   
-											   
-    localStorage.setItem("previousCart", JSON.stringify(Order));
-
-    $("#msg-container").removeClass('hide');
-    $("#msg").html('Submitted successfully...')
-    window.setInterval(function () {
-        var timeLeft = $("#timeLeft").html();
-        if (eval(timeLeft) == 0) {
-            /*clears current cart and redirects to products page*/
-            localStorage.setItem("cart", '');
-            window.location.href = "products.html";
-        } else {
-            $("#timeLeft").html(eval(timeLeft) - eval(1));
-        }
-    }, 1000);
+    
 }
 //------------------------------------------------------------------------
 function validateEmail(email) {
