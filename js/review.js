@@ -37,6 +37,7 @@ $(document).ready(function () {
     }
     updateCartCount();
     var mailObj = mailUtil();
+    mailObj.Initialize();
 });
 //------------------------------------------------------------------------
 /*function to load review cart */
