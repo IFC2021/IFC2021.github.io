@@ -1,6 +1,6 @@
 (function(_mailUtil) {
   var mailUtil = _mailUtil();
-
+//-------------------------------------------------------------------------------------------
   // get all data in form and return object
   function getFormData(form) {
     var elements = form.elements;
@@ -57,7 +57,7 @@
 
     return {data: formData, honeypot: honeypot};
   }
-
+//-------------------------------------------------------------------------------------------
   function handleFormSubmit(event) {  // handles form submit without any jquery
     event.preventDefault();           // we are submitting via xhr below
     var form = event.target;
@@ -73,7 +73,7 @@
     mailUtil.SendMail(data, success, failure);
 
   }
-
+//-------------------------------------------------------------------------------------------
   function success(event){
       var form = document.getElementById('frmContactUs');
       var formElements = form.querySelector(".form-elements")
@@ -86,11 +86,11 @@
         thankYouMessage.style.display = "block";
       }
   }
-
+//-------------------------------------------------------------------------------------------
   function failure(err){
     console.log('Error sending mail!', err);
   }
-
+//-------------------------------------------------------------------------------------------
   function loaded() {
 
     mailUtil.Initialize();
@@ -102,9 +102,9 @@
     }
 
   };
-
+//-------------------------------------------------------------------------------------------
   document.addEventListener("DOMContentLoaded", loaded, false);
-
+//-------------------------------------------------------------------------------------------
   function disableAllButtons(form) {
     var buttons = form.querySelectorAll("button");
     for (var i = 0; i < buttons.length; i++) {
