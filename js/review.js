@@ -198,15 +198,15 @@ function submitWebOrder() {
     var frmEml = $('#txtOrderFromEmail').val().trim();
     if (validateEmail(frmEml)){
         console.log("valid Email: " + frmEml);
-        OrderObj.OrderComment = $('#txtOrderComments').val().trim();
-        OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
-        Order.push(OrderObj);
-
+        
         var cartString = getOrderString();
         //console.log("See " + cartString);
         //showAndroidToast('Order => ' + cartString);
-        mailObj.SendMail(cartString, successEventPostAPI, failureEventPostAPI);
-        /* moves current order to previous cart */					   
+        mailObj.SendMail(frmEml + ";" + cartString, successEventPostAPI, failureEventPostAPI);
+        /* moves current order to previous cart */	
+        OrderObj.OrderComment = $('#txtOrderComments').val().trim();
+        OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
+        Order.push(OrderObj);				   
                                                 
         localStorage.setItem("previousCart", JSON.stringify(Order));
 
