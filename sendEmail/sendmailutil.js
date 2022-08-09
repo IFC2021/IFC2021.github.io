@@ -1,7 +1,8 @@
 var mailUtil = function() {
   
   // Script level variables to form Script URL of google spredsheet - Config Data
-  var CONFIG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaTqxIms1hsO-y-VMGT_Ciakcf9umGJWJwbmzCbyCG3SkR9Es0a6Ugyw-oYJEQ70y_ew/exec';
+  var CONFIG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaTqxIms1hsO-y-VMGT_Ciakcf9umGJWJwbmzCbyCG3SkR9Es0a6Ugyw-oYJEQ70y_ew/exec
+/exec';
   var sheetId = '1me4Cez__K8zF01CXl3q5wAb_QFgTYH3hOHDVAv3oSpg';
   var base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
   var sheetName = 'scriptUrls';   // sheetname inside 'ConfigData' spreadsheet
@@ -13,7 +14,7 @@ var mailUtil = function() {
   var SCRIPT_URL_ROW_INDEX = 0;
   var IS_EMAILQUOTA_EXCEEDED = false;
   var ACTIVE_SCRIPT_URL = '';
-
+//-------------------------------------------------------------------------------
   // This function is used to load data from Google spreadsheet - "config data"
   // initialize needs to be executed on page load/script load so that config data is populated
   // before caling sendMail function
@@ -52,7 +53,7 @@ var mailUtil = function() {
             console.log('Error occured while populating config data from google spreadsheet', err);
           })
   }
-
+//-------------------------------------------------------------------------------
  
   // This function is used to send mail using Google APIs
   // It make XHR call to Google script url for sending mails
@@ -95,7 +96,7 @@ var mailUtil = function() {
         xhr.send(encoded);
 
   }
-    
+//-------------------------------------------------------------------------------    
   // This function is used to update Remaining Email Quota in Google spreadsheet - "Config Data" 
   // It make XHR call to update google spreadsheet
   // This function is for intenal calling i.e. from sendMail and not for external use
@@ -135,7 +136,7 @@ var mailUtil = function() {
         }).join('&');
         xhr.send(encoded);
   }
-
+//-------------------------------------------------------------------------------
   // This function is used to initialize global level variables
   // This function is for intenal calling i.e. from initialize and not for external use
   function assignInitialScriptAction(configSheetData){
@@ -163,7 +164,7 @@ var mailUtil = function() {
     console.log('Form action URL set to:', ACTIVE_SCRIPT_URL);
 
   }
-
+ //-------------------------------------------------------------------------------
   return function(){
     return { Initialize: initialize, SendMail: sendMail }
   }
