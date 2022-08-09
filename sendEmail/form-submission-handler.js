@@ -48,14 +48,14 @@
     //}else{
       //formData.formQuotaWarningMsg = "Contact Form Submitted: ";
     //}
-    console.log("HTML form data 1: " + formData);
+    console.log("HTML form data 11: " + JSON.stringify(formData));
     // add form-specific values into the data
     formData.formDataNameOrder = JSON.stringify(fields);
     formData.formGoogleSheetName = form.dataset.sheet || "responses"; // default sheet name
     formData.formGoogleSendEmail
       = form.dataset.email || ""; // no email by default
     
-    console.log("HTML form data 2: " + formData);
+    console.log("HTML form data 22: " + JSON.stringify(formData));
     return {data: formData, honeypot: honeypot};
   }
 //-------------------------------------------------------------------------------------------
