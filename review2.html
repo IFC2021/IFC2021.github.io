@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>IFC Site - Cart</title>
+
+    <meta name="keywords" content="Catalogue" />
+    <meta name="description" content="Catalogue">
+    <meta name="author" content="SW-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.ico">
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: ['Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+
+    </script>
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
+    <style>
+        .img-responsive {
+            display: block !important;
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        .inline-list li {
+            display: inline;
+            padding: 0px 5px;
+        }
+
+        .cart-btn:after {
+            content: "\e81c";
+            border: 0;
+            margin: -5px 2px 0 11px;
+            font-size: 15px;
+            font-family: porto;
+            width: auto;
+            height: auto;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .dropdown-arrow:after {
+            content: none;
+            border: 0;
+            margin: -5px 2px 0 11px;
+            font-size: 15px;
+            font-family: porto;
+            width: auto;
+            height: auto;
+        }
+
+        .btn-xs {
+            padding: 1px 10px;
+            font-size: 10px;
+            line-height: 2.5;
+        }
+
+        .btn-xs-edit {
+            padding: 1px 10px;
+            font-size: 10px;
+            line-height: 2.5;
+        }
+
+        .btn-xs-delete {
+            padding: 1px 11px;
+            font-size: 10.5px;
+            line-height: 2.4;
+            margin-top: 10px;
+        }
+
+        .list li a {
+            padding: 0.5rem 0 .5rem 2rem !important;
+        }
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            .delete-modal-sm {
+                width: 100%;
+            }
+
+            #confirmDelete {
+                padding-right: 10% !important;
+                padding-left: 10% !important;
+            }
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            .delete-modal-sm {
+                width: 100%;
+            }
+
+            #confirmDelete {
+                padding-right: 10% !important;
+                padding-left: 10% !important;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            .delete-modal-sm {
+                width: 30%;
+            }
+        }
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            .delete-modal-sm {
+                width: 30%;
+            }
+        }
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+            .delete-modal-sm {
+                width: 30%;
+            }
+        }
+		
+		#txtOrderComments {
+            max-width: none !important;
+            min-height: auto !important;
+            padding: 7px !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div  id="headerTextCarousel"  class="owl-carousel owl-theme owl-carousel-lazy" data-owl-options="{
+							'dots': false,
+							'nav': false,
+                            'autoplay':true,
+                            'autoplayTimeout':2000,
+                            'animateOut': 'fadeOut',
+                            'autoplayHoverPause':true
+	 }">
+        
+    </div>
+    <header class="header">
+        <div class="header-middle">
+            <div class="container">
+                <div class="header-left col-lg-2 w-auto pl-0">
+                    <button class="mobile-menu-toggler mr-2" type="button">
+                        <i class="icon-menu"></i>
+                    </button>
+                    <a href="index.html" class="logo">
+                        <img alt="myLogo" src="assets/images/logo-new.png" >
+                    </a>
+                </div><!-- End .header-left -->
+
+                <div class="header-right w-lg-max ml-0">
+                    <div class="header-icon header-search header-search-inline header-search-category w-lg-max pl-3">
+                        <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
+                        <form action="#" method="get">
+                            <div class="header-search-wrapper">
+                                <input type="search" class="form-control" name="q" id="q" placeholder="Search..." required>
+                                <div class="select-custom">
+                                    <select id="searchCat">
+                                    </select>
+                                </div><!-- End .select-custom -->
+                                <button class="btn icon-search-3" type="submit"></button>
+                            </div><!-- End .header-search-wrapper -->
+                        </form>
+                    </div><!-- End .header-search -->
+
+                    <div class="header-contact d-none d-lg-flex pl-4 ml-3 mr-xl-5 pr-4">
+                        <img alt="phone" src="assets/images/phone.png" width="30" height="30" class="pb-1">
+                        <h6>Call us now<a href="tel:#" class="font1">+91 98197 77642</a></h6>
+                    </div>
+                    <div class="dropdown cart-dropdown">
+                        <a href="review.html" class="dropdown-toggle dropdown-arrow">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="cart-count badge-circle" id="cartItemCount">0</span>
+                        </a>
+                    </div>
+                </div><!-- End .header-right -->
+            </div><!-- End .container -->
+        </div><!-- End .header-middle -->
+
+        <div class="header-bottom sticky-header d-none d-lg-block">
+            <div class="container">
+                <nav class="main-nav w-100">
+                    <ul class="menu">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="javascript:" onclick="navigateToProducts('All')">Categories<span class="tip tip-new tip-top">New</span></a>
+                            <div class="megamenu megamenu-fixed-width megamenu-3cols">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <ul class="submenu" id="catPart1">
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <ul class="submenu" id="catPart2">
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div><!-- End .megamenu -->
+                        </li>
+                        <!-- <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li> -->
+                    </ul>
+                </nav>
+            </div><!-- End .container -->
+        </div><!-- End .header-bottom -->
+    </header><!-- End .header -->
+
+    <main class="main">
+
+        <div class="container" style="min-height:510px;">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><span id="activeBreadCrumb">Review</span> </li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-lg-8 main-content">
+                    <table class="table table-mini-cart">
+                        <tbody id="reviewCart">
+                            <tr><td>Loading...</td></tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart-summary">
+						<div id="divComments">
+                            <label for="txtOrderComments">Comments (if any)</label>
+                            <textarea id="txtOrderComments" rows="2" maxlength="255" class="form-control"> </textarea>
+                        </div>							  
+                        <div class="checkout-methods">
+                            <a href="javascript:" onclick="submitOrder()" id="btnSubmitOrder" class="btn btn-block btn-sm btn-primary">Submit</a>
+                        </div><!-- End .checkout-methods -->
+                        <br />
+                        <div class="checkout-methods">
+                            <a href="products.html" id="btnContinueToProducts" class="btn btn-block btn-sm btn-primary">Continue to Products</a>
+                        </div><!-- End .checkout-methods -->
+                        <br />
+                        <div>
+                            <a href="javascript:" id="btnShowCurrentCart" onclick="switchCart(false)" class="btn btn-sm btn-block btn-outline-secondary hide">Show Current Cart</a>
+                            <a href="javascript:" id="btnShowPreviousCart" onclick="switchCart(true)" class="btn btn-sm btn-block btn-outline-secondary">Show Previous Cart</a>
+                        </div><!-- End .checkout-methods -->
+                        <br />
+                        <div>
+                            <a href="javascript:" id="btnClearPreviousCart" onclick="confirmClearCart('previous-cart')" class="btn btn-sm btn-block btn-outline-secondary hide">Clear Cart</a>
+                            <a href="javascript:" id="btnClearCurrentCart" onclick="confirmClearCart('current-cart')" class="btn btn-sm btn-block btn-outline-secondary">Clear Cart</a>
+                        </div><!-- End .checkout-methods -->
+                        <br />
+                        <div>
+                            <div class="alert alert-success hide" id="msg-container">
+                                <span id="msg"></span> <br />Redirecting to products in <span id="timeLeft">5</span> ...
+                            </div>
+                        </div>
+
+                    </div><!-- End .cart-summary -->
+
+                </div><!-- End .col-lg-4 -->
+            </div>
+
+        </div><!-- End .container -->
+
+        <div class="mb-3"></div><!-- margin -->
+    </main><!-- End .main -->
+
+    <footer class="footer bg-dark">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="footer-ribbon bg-primary text-white ls-10">
+                    Get in touch
+                </div><!-- End .footer-ribbon -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-4">
+                        <div class="widget">
+                            <h4 class="widget-title">Contact Info</h4>
+                            <ul class="contact-info">
+                                <li>
+                                    <span class="contact-info-label">Address</span>Vasai East, Palghar - Mah, India
+                                </li>
+                                <li>
+                                    <span class="contact-info-label">Phone</span>  <a href="tel:">+91 98197 77642</a>
+                                </li>
+                                <li>
+                                    <span class="contact-info-label">Email</span> <a href="mailto:innovative.fittings@gmail.com">innovative.fittings@gmail.com</a>
+                                </li>
+                                <li>
+                                    <span class="contact-info-label">Working Days/Hours</span>
+                                    Mon - Sat / 10:00AM - 7:00 PM
+                                </li>
+                            </ul>
+                        </div><!-- End .widget -->
+                    </div><!-- End .col-lg-3 -->
+
+                    <div class="col-lg-9 col-md-8">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="widget">
+                                    <h4 class="widget-title">Customer Service</h4>
+
+                                    <ul class="links link-parts row mb-0">
+                                        <div class="link-part col-lg-6 col-md-12">
+                                        <!-- <li>
+                                            <span class="contact-info-label">Help &amp; FAQs</span>
+                                        </li> -->
+                                        <li>
+                                            <span class="contact-info-label">Phone: <a href="tel:">+91 98197 77642</a></span>
+                                        </li>
+                                </div>
+                                </ul>
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-6 -->
+
+                        <div class="col-sm-6">
+                            <div class="widget">
+                                <!-- <h4 class="widget-title">About Us</h4>
+
+                                <ul class="links link-parts row mb-0">
+                                    <div class="link-part col-lg-6 col-md-12">
+                                    <li><a href="about.html">About Us</a></li> -->
+                            </div>
+                            </ul>
+                        </div><!-- End .widget -->
+                    </div><!-- End .col-sm-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .col-lg-9 -->
+        </div><!-- End .row -->
+        </div><!-- End .container -->
+        </div><!-- End .footer-middle -->
+        <div class="container">
+            <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap">
+                <div class="col-xs 6">
+                    <p class="footer-copyright py-3 pr-4 mb-0">© Company. 2022. All Rights Reserved</p>
+                </div>
+                <div class="col-xs 6 text-right">
+                    <p class="footer-copyright py-3 pr-4 mb-0 app-version"></p>
+                    <a href="#userAgentContainer" data-toggle="collapse" onclick="getUserAgent()">User Agent</a>
+                    <div id="userAgentContainer" class="collapse">
+                        <div id="userAgent"></div>
+                        <div id="pageVersion"></div>
+                    </div>
+                    <div> <noscript>Javascript is not enabled</noscript></div>
+                </div>
+            </div><!-- End .footer-bottom -->
+        </div><!-- End .container -->
+    </footer>
+
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-cancel"></i></span>
+            <nav class="mobile-nav">
+                <ul class="mobile-menu mb-3">
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li class="open">
+                        <a href="javascript:" onclick="navigateToProducts('All')">Categories<span class="tip tip-new">New</span></a>
+                    <ul id="mobileViewMenuCat"  style="display:block">
+                        </ul>
+                    </li>
+                    <!-- <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li> -->
+                </ul>
+
+
+            </nav><!-- End .mobile-nav -->
+
+
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <div class="modal fade" id="confirmDelete" role="dialog" style="background-color:rgba(0,0,0,0.7)">
+        <div class="modal-dialog delete-modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row row-sparse">
+                        <div class="col-xs-12">
+                            <h6>Are you sure to delete?</h6>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-xs btn-danger" onclick="deleteCartRow()">Delete</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-xs" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hdnValueToDelete" />
+                        </div><!-- End .product-single-gallery -->
+                    </div><!-- End .row -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmClearCart" role="dialog" style="background-color:rgba(0,0,0,0.7)">
+        <div class="modal-dialog delete-modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row row-sparse">
+                        <div class="col-xs-12">
+                            <h6>Are you sure to clear cart?</h6>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-xs btn-danger" onclick="clearCart()">Clear</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-xs" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+							<input type="hidden" id="hdnCartTypeToDelete" />												
+                        </div><!-- End .product-single-gallery -->
+                    </div><!-- End .row -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+	<script src="js/common.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.min.js"></script>
+    
+    <script src="js/review.js"></script>
+</body>
+</html>
