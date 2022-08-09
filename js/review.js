@@ -152,6 +152,7 @@ function confirmClearCart(cartType) {
     $('#hdnCartTypeToDelete').val(cartType);
     $('#confirmClearCart').modal('show');
 }
+//------------------------------------------------------------------------
 function clearCart() {
     $('#confirmClearCart').modal('hide');
     if ($('#hdnCartTypeToDelete').val() == 'current-cart') {
