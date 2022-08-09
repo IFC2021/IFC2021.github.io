@@ -176,12 +176,53 @@ function clearCart() {
     }, 1000);
 }
 /*Section - Clear cart*/
+//------------------------------------------------------------------------
+/* submit web order*/
+function submitWebOrder() {
+    var Order = [];
+
+    var OrderObj = {};
+
+    // check if email ID is valid
+
+    OrderObj.OrderComment = $('#txtOrderComments').val().trim();
+    OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
+    Order.push(OrderObj);
+
+    var cartString = getOrderString();
+    //console.log("See " + cartString);
+	//showAndroidToast('Order => ' + cartString);															
+    /* moves current order to previous cart */					   
+											   
+    localStorage.setItem("previousCart", JSON.stringify(Order));
+
+    $("#msg-container").removeClass('hide');
+    $("#msg").html('Submitted successfully...')
+    window.setInterval(function () {
+        var timeLeft = $("#timeLeft").html();
+        if (eval(timeLeft) == 0) {
+            /*clears current cart and redirects to products page*/
+            localStorage.setItem("cart", '');
+            window.location.href = "products.html";
+        } else {
+            $("#timeLeft").html(eval(timeLeft) - eval(1));
+        }
+    }, 1000);
+}
 
 //------------------------------------------------------------------------
 /* submit order.*/
 function submitOrder() {
+    if(typeof Android !== "undefined" && Android !== null) {
+        submitAndroidOrder();
+    } else {
+        submitWebOrder();
+    }
+}
+//------------------------------------------------------------------------
+/* submit Phone order.*/
+function submitAndroidOrder() {
     var Order = [];
-
     var OrderObj = {};
 
     OrderObj.OrderComment = $('#txtOrderComments').val().trim();
@@ -208,7 +249,6 @@ function submitOrder() {
         }
     }, 1000);
 }
-
 //------------------------------------------------------------------------
 function editCart(ProductID) {
     /*set product id to storage and redirects to product details. value of cartProductToEdit is used in product detail page to decide of call is from edit cart*/
