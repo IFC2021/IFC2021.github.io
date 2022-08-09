@@ -184,7 +184,14 @@ function submitWebOrder() {
     var OrderObj = {};
 
     // check if email ID is valid
-
+    var frmEml = $('#txtOrderFromEmail').val().trim();
+    if (validateEmail(frmEml)){
+        console.log("valid Email: " + frmEml);
+    }else{
+        console.log("Wrong Email: " + frmEml);
+        alert("Fix email address first!");
+    }
+    
     OrderObj.OrderComment = $('#txtOrderComments').val().trim();
     OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
     Order.push(OrderObj);
@@ -209,7 +216,11 @@ function submitWebOrder() {
         }
     }, 1000);
 }
-
+//------------------------------------------------------------------------
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
 //------------------------------------------------------------------------
 /* submit order.*/
 function submitOrder() {
