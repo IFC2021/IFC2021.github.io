@@ -1,4 +1,5 @@
 
+var mailObj = mailUtil();
 //------------------------------------------------------------------------
 $(document).ready(function () {
 
@@ -36,7 +37,7 @@ $(document).ready(function () {
         loadReviewCart();
     }
     updateCartCount();
-    var mailObj = mailUtil();
+    
     mailObj.Initialize();
 });
 //------------------------------------------------------------------------
@@ -180,6 +181,13 @@ function clearCart() {
 }
 /*Section - Clear cart*/
 //------------------------------------------------------------------------
+function successEventPostAPI(event){
+    console.log('Success from sendmail API. ');
+}
+function failureEventPostAPI(err){
+    console.log('Error from sendmail API! ', err);
+}
+//------------------------------------------------------------------------
 /* submit web order*/
 function submitWebOrder() {
     var Order = [];
@@ -196,7 +204,8 @@ function submitWebOrder() {
 
         var cartString = getOrderString();
         //console.log("See " + cartString);
-        //showAndroidToast('Order => ' + cartString);															
+        //showAndroidToast('Order => ' + cartString);
+        mailObj.SendMail(cartString, successEventPostAPI, failureEventPostAPI);
         /* moves current order to previous cart */					   
                                                 
         localStorage.setItem("previousCart", JSON.stringify(Order));
