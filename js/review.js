@@ -36,6 +36,7 @@ $(document).ready(function () {
         loadReviewCart();
     }
     updateCartCount();
+    var mailObj = mailUtil();
 });
 //------------------------------------------------------------------------
 /*function to load review cart */
