@@ -37,7 +37,7 @@ $(document).ready(function () {
         loadReviewCart();
     }
     updateCartCount();
-    console.log('Initializing mailing engine...');
+    console.log('Initializing mailing engine...2');
     mailObj.Initialize();
 });
 //------------------------------------------------------------------------
