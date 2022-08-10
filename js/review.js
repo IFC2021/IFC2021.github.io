@@ -200,9 +200,10 @@ function submitWebOrder() {
         console.log("valid Email: " + frmEml);
         
         var cartString = getOrderString();
+        var msgObj={message: cartString, email:frmEml};
         //console.log("See " + cartString);
         //showAndroidToast('Order => ' + cartString);
-        mailObj.SendMail(frmEml + ";" + cartString, successEventPostAPI, failureEventPostAPI);
+        mailObj.SendMail(msgObj, successEventPostAPI, failureEventPostAPI);
         /* moves current order to previous cart */	
         OrderObj.OrderComment = $('#txtOrderComments').val().trim();
         OrderObj.Cart = JSON.parse(localStorage.getItem("cart"));
