@@ -37,7 +37,7 @@ $(document).ready(function () {
         loadReviewCart();
     }
     updateCartCount();
-    console.log('Initializing mailing engine...2');
+    console.log('Initializing mailing engine...');
     mailObj.Initialize();
 });
 //------------------------------------------------------------------------
@@ -196,11 +196,12 @@ function submitWebOrder() {
 
     // check if email ID is valid
     var frmEml = $('#txtOrderFromEmail').val().trim();
+    var orderNotes = $('#txtOrderComments').val().trim();
     if (validateEmail(frmEml)){
         console.log("valid Email: " + frmEml);
         
         var cartString = getOrderString();
-        var msgObj={message: cartString, email:frmEml};
+        var msgObj={Order: cartString, From:frmEml, Notes:orderNotes};
         //console.log("See " + cartString);
         //showAndroidToast('Order => ' + cartString);
         mailObj.SendMail(msgObj, successEventPostAPI, failureEventPostAPI);
