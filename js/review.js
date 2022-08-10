@@ -363,7 +363,13 @@ function getOrderString(){
     }
     sResponse += seperatorLine;
 
-    sResponse += getOrderComments();
+    if(typeof Android !== "undefined" && Android !== null) {
+        sResponse += getOrderComments();
+    } else {
+        //for Web Order
+    }
+
+    
     return  sResponse;
    }
 
