@@ -37,9 +37,9 @@ $(document).ready(function () {
         loadReviewCart();
     }
     updateCartCount();
-    console.log('Initializing mailing engine .. test...');
+    console.log('Initializing mailing engine .. tes...');
     mailObj.Initialize();
-    $('#txtOrderFromEmail').addClass('hide');
+    $('#divEmail').addClass('hide');
 });
 //------------------------------------------------------------------------
 /*function to load review cart */
@@ -243,10 +243,10 @@ function validateEmail(email) {
 function renderEmailInput() {
     if(typeof Android !== "undefined" && Android !== null) {
         //for app
-        $('#txtOrderFromEmail').addClass('hide');
+        $('#divEmail').addClass('hide');
     } else {
         //for browser
-        $('#txtOrderFromEmail').removeClass('hide');
+        $('#divEmail').removeClass('hide');
     }
 }
 //------------------------------------------------------------------------
