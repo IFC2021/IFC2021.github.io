@@ -37,7 +37,7 @@ $(document).ready(function () {
         loadReviewCart();
     }
     updateCartCount();
-    console.log('Initializing mailing engine .. tes...');
+    console.log('Initializing mailing engine ...');
     mailObj.Initialize();
     renderEmailInput();
     //$('#divEmail').addClass('hide');
