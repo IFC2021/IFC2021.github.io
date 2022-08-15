@@ -39,7 +39,8 @@ $(document).ready(function () {
     updateCartCount();
     console.log('Initializing mailing engine .. tes...');
     mailObj.Initialize();
-    $('#divEmail').addClass('hide');
+    renderEmailInput();
+    //$('#divEmail').addClass('hide');
 });
 //------------------------------------------------------------------------
 /*function to load review cart */
