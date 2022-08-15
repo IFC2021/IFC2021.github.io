@@ -39,6 +39,7 @@ $(document).ready(function () {
     updateCartCount();
     console.log('Initializing mailing engine...');
     mailObj.Initialize();
+    $('#txtOrderFromEmail').addClass('hide');
 });
 //------------------------------------------------------------------------
 /*function to load review cart */
@@ -236,6 +237,17 @@ function submitWebOrder() {
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
+}
+//------------------------------------------------------------------------
+/* submit order.*/
+function renderEmailInput() {
+    if(typeof Android !== "undefined" && Android !== null) {
+        //for app
+        $('#txtOrderFromEmail').addClass('hide');
+    } else {
+        //for browser
+        $('#txtOrderFromEmail').removeClass('hide');
+    }
 }
 //------------------------------------------------------------------------
 /* submit order.*/
